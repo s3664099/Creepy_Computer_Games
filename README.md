@@ -36,7 +36,16 @@ to press the correct key. Case is ignored where letters are concerned. If you ar
 increases, but if you are incorrect, or take to long, your score goes down. The game ends when you either
 get more than 500 or less than 0.
 
+**Number Wizard**
+This game involves you matching the numbers that the wizard generates. You have numbers 1 to 9 available
+but can only be used once, with the exception of 0, which can be used as many times as you like. The total of
+the numbers you select must match the total of the numbers the wizard rolled. If you use all of you numbers you
+win, but if you run out of turns, you lose. Oh, and if the wizard rolls a double, you get an extra turn.
+
 ## Updates
 **22 July 2023**
 Created the initial folder to hold the contents on the game.
 Added Computer Nightmare
+
+**30 July 2023**
+Added the Number Wizard Game
