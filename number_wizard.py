@@ -28,15 +28,25 @@ instructions = "{}zeros. See how many times you can beat the wizard".format(inst
 
 def main_game():
 	
+	#Sets the array for the numbers
 	number = []
-
 	for x in range(10):
 		number.append(x)
 
+	#Sets the main variables, including the winner and same number flag
 	numbers_used = 0
 	turns = 8
 	wizard_won = False
 	same_number = False
+
+	wizard_won = game_loop(number,numbers_used,turns,wizard_won,same_number)
+
+	if (wizard_won == True):
+		print("The wizard won")
+	else:
+		print("You won")
+
+def game_loop(number,numbers_used,turns,wizard_won,same_number):
 
 	while (numbers_used<8):
 
@@ -47,29 +57,7 @@ def main_game():
 
 		same_number = False
 
-
-		numbers_used = 0
-		display_number = ""
-		number[0] = 1
-
-		for x in range (0,10):
-
-			if number[x] == 0:
-				display_number+=" "
-				numbers_used += 1
-			else:
-				display_number += "{}".format(x)
-
-			display_number += " "
-
-		print(display_number)
-		print()
-		print("You have {} turns left".format(turns))
-
-		first_dice = randint(1,6)
-		second_dice = randint(1,6)
-
-		print("The dice throw is {}, {}".format(first_dice,second_dice))
+		first_dice,second_dice = display(number,turns)
 
 		if (first_dice == second_dice):
 			turns += 2
@@ -80,24 +68,56 @@ def main_game():
 			wizard_won = True
 			numbers_used = 10
 		else:
-			first_choice = util.get_num_input("What is your first choice",0,9)
-			second_choice = util.get_num_input("What is your second choice",0,9)
+			same_number = get_input(number,first_dice,second_dice)
 
-			if (first_choice+second_choice == first_dice+second_dice):
-				if (((number[first_choice] != 0) and (number[second_choice] != 0)) and
-					(first_choice != second_choice)):
-					number[first_choice] = 0
-					number[second_choice] = 0
-				elif ((first_choice == second_choice) and (first_choice != 0)):
-					same_number = True
-			elif ((first_choice == second_choice) and (first_choice != 0)):
-				same_number = True
+	return wizard_won
 
+def display(number,turns):
 
-	if (wizard_won == True):
-		print("The wizard won")
-	else:
-		print("You won")
+	number[0] = 1
+	numbers_used = 0
+	display_number = ""
+	
+	for x in range (0,10):
+
+		if number[x] == 0:
+			display_number+=" "
+			numbers_used += 1
+		else:
+			display_number += "{}".format(x)
+
+		display_number += " "
+
+	print(display_number)
+	print()
+	print("You have {} turns left".format(turns))
+
+	first_dice = randint(1,6)
+	second_dice = randint(1,6)
+
+	print("The dice throw is {}, {}".format(first_dice,second_dice))
+
+	return first_dice,second_dice
+
+def get_input(number,first_dice,second_dice):
+
+	same_number = False
+
+	first_choice = util.get_num_input("What is your first choice",0,9)
+	second_choice = util.get_num_input("What is your second choice",0,9)
+
+	if (first_choice+second_choice == first_dice+second_dice):
+		if (((number[first_choice] != 0) and (number[second_choice] != 0)) and
+			(first_choice != second_choice)):
+			number[first_choice] = 0
+			number[second_choice] = 0
+		elif ((first_choice == second_choice) and (first_choice != 0)):
+			same_number = True
+	elif ((first_choice == second_choice) and (first_choice != 0)):
+		same_number = True
+
+	return same_number
+
 
 #Passes the current file as a module to the loader
 if __name__ == '__main__':
