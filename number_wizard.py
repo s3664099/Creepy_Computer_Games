@@ -36,20 +36,29 @@ def main_game():
 	numbers_used = 0
 	turns = 8
 	wizard_won = False
+	same_number = False
 
-	while (numbers_used<9):
+	while (numbers_used<8):
 
 		util.clear_screen()
-		display_number = ""
-		number[1] = 1
 
-		for x in range (1,10):
+		if (same_number == True):
+			print("You cannot use the same number other than 0 twice")
+
+		same_number = False
+
+
+		numbers_used = 0
+		display_number = ""
+		number[0] = 1
+
+		for x in range (0,10):
 
 			if number[x] == 0:
 				display_number+=" "
 				numbers_used += 1
 			else:
-				display_number += "{}".format(x-1)
+				display_number += "{}".format(x)
 
 			display_number += " "
 
@@ -69,14 +78,21 @@ def main_game():
 
 		if (turns <= 0):
 			wizard_won = True
+			numbers_used = 10
 		else:
 			first_choice = util.get_num_input("What is your first choice",0,9)
 			second_choice = util.get_num_input("What is your second choice",0,9)
 
-		if ((first_choice+second_choice == first_dice+second_dice) or (number[first_choice+1] != 0)
-			or (number[second_choice+1] != 0)):
-			number[first_choice+1] = 0
-			number[second_choice+1] = 0
+			if (first_choice+second_choice == first_dice+second_dice):
+				if (((number[first_choice] != 0) and (number[second_choice] != 0)) and
+					(first_choice != second_choice)):
+					number[first_choice] = 0
+					number[second_choice] = 0
+				elif ((first_choice == second_choice) and (first_choice != 0)):
+					same_number = True
+			elif ((first_choice == second_choice) and (first_choice != 0)):
+				same_number = True
+
 
 	if (wizard_won == True):
 		print("The wizard won")
