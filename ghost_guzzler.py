@@ -30,10 +30,45 @@ def main_game():
 	lives = 3
 	ghost_number = randint(0,9)
 	distance = 1
+	living = True
 
-	util.clear_screen()
-	print_lives(lives)
-	display_position(ghost_number,number,distance)
+	while (living == True):
+
+		got_ghost = False
+		util.clear_screen()
+		print_lives(lives)
+		display_position(ghost_number,number,distance)
+
+		keypress = util.input_with_timeout_no_comment("",2)
+
+		if keypress == "m":
+
+			number +=1
+
+			if (number == 10):
+				number = 0
+	
+		elif keypress == "x":
+
+			if number == ghost_number:
+				print("Got It")
+				print("******")
+
+				distance = 1
+				score = score + (18-distance)
+				ghost_number = randint(0,9)
+				got_ghost = True
+
+		if (got_ghost == False):
+			distance += 1
+
+			if (distance==18):
+				lives -= 1
+				distance = 1
+				ghost_number = randint(0,9)
+
+			if (lives == 0):
+				living = False
 
 def display_position(ghost_number,number,distance):
 
