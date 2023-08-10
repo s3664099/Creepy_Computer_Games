@@ -14,6 +14,15 @@ Date: 5 August 2023
 Source: https://ia801902.us.archive.org/3/items/Creepy_Computer_Games_1983_Usborne_Publishing/Creepy_Computer_Games_1983_Usborne_Publishing.pdf
 This game can be found on page 6 of Creepy Computer Games, and it a python3 translation.
 
+This came is sort of an arcade game where you have to match the number that is approaching you. You 
+can only increase it, and when you are matching it you attempt to guzzle it. If you do it before the
+ghost (number) reaches you, then you get points based on the distance. Otherwise you lose a life.
+
+I have added the score so you can see it as you are playing.
+
+You can change the ease of the game by raising or lowering the speed (lower the faster, and it doesn't
+need to be an integer). You can also change the difficulty by changing the max_distance (lower, harder).
+
 """
 
 instructions = "The ghosts in this game are numbers rushing across the screen. To catch them,\n"
@@ -31,46 +40,66 @@ def main_game():
 	ghost_number = randint(0,9)
 	distance = 1
 	living = True
+	speed = 1
+	max_distance = 18
 
 	while (living == True):
 
 		got_ghost = False
 		util.clear_screen()
-		print_lives(lives)
-		display_position(ghost_number,number,distance)
+		print_lives(lives,score)
+		display_position(ghost_number,number,distance,max_distance+1)
 
-		keypress = util.input_with_timeout_no_comment("",2)
+		keypress = util.input_with_timeout_no_comment("",speed)
 
-		if keypress == "m":
+		got_ghost,number = check_keypress(keypress,number,ghost_number)
 
-			number +=1
+		#Checks if you got the ghost
+		if (got_ghost == True):
 
-			if (number == 10):
-				number = 0
-	
-		elif keypress == "x":
+			#Increases score and resets
+			distance = 1
+			score = score + (max_distance-distance)
+			ghost_number = randint(0,9)
 
-			if number == ghost_number:
-				print("Got It")
-				print("******")
-
-				distance = 1
-				score = score + (18-distance)
-				ghost_number = randint(0,9)
-				got_ghost = True
-
-		if (got_ghost == False):
+		else:
 			distance += 1
 
-			if (distance==18):
+			#Ghost got you
+			if (distance==max_distance):
 				lives -= 1
 				distance = 1
 				ghost_number = randint(0,9)
 
+			#Out of lives
 			if (lives == 0):
 				living = False
 
-def display_position(ghost_number,number,distance):
+#Processes the keypress
+def check_keypress(keypress,number,ghost_number):
+
+	got_ghost = False
+
+	#Increases the number - do the opposite to add a command to lower the number
+	if keypress == "m":
+
+		number +=1
+
+		if (number == 10):
+			number = 0
+
+	#Guzzle Attempt	
+	elif keypress == "x":
+
+		#Checks if the  numbers match
+		if number == ghost_number:
+			print("Got It")
+			print("******")
+			got_ghost = True
+
+	return got_ghost,number
+
+def display_position(ghost_number,number,distance,max_distance):
 
 	first_distance = ""
 	second_distance = ""
@@ -79,20 +108,20 @@ def display_position(ghost_number,number,distance):
 	for x in range (distance):
 		first_distance += "  "
 
-	for x in range (19-distance):
+	for x in range (max_distance-distance):
 		second_distance += "   "
 
 	# Print the resulting text
 	print("{}{}{}:{}".format(first_distance,ghost_number,second_distance,number))
 
-def print_lives(lives):
+def print_lives(lives,score):
 
 	life_display=""
 
 	for x in range(lives):
 		life_display+="/ "
 
-	print(life_display)
+	print("{} Score: {}".format(life_display,score))
 	print("\n\n\n")
 
 #Passes the current file as a module to the loader

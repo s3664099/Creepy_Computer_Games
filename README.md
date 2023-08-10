@@ -42,6 +42,12 @@ but can only be used once, with the exception of 0, which can be used as many ti
 the numbers you select must match the total of the numbers the wizard rolled. If you use all of you numbers you
 win, but if you run out of turns, you lose. Oh, and if the wizard rolls a double, you get an extra turn.
 
+**Ghost Guzzler**
+This is sort of an arcade game where you have to match the number (that is the ghost). I have removed hard
+coded numbers to make it easier to change the difficulty. The problem with the INKEY is also present, as you
+need to press 'enter' after typing your action, otherwise nothing will happen. You can only increase the
+number (though code to make it decrease isn't all that hard, and will probably make the game easier)
+
 ## Updates
 **22 July 2023**
 Created the initial folder to hold the contents on the game.
