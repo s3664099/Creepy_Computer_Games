@@ -27,6 +27,7 @@ However, a loader program has been included, so that is the only one that theore
 executed as all of the other programs can be executed from that one.
 
 ## Issues
+The issue regarding getting the INKEY to work properly is still present.
 
 ## Games
 
@@ -47,6 +48,15 @@ This is sort of an arcade game where you have to match the number (that is the g
 coded numbers to make it easier to change the difficulty. The problem with the INKEY is also present, as you
 need to press 'enter' after typing your action, otherwise nothing will happen. You can only increase the
 number (though code to make it decrease isn't all that hard, and will probably make the game easier)
+
+**Spiderwoman**
+Another guessing game where you have to guess a letter by throwing out some words. Mind you, there is no
+restriction on the words that are entered, which means you can enter any old rubbish. I could reference an
+English word list, but I really can't be bothered. Further details of the game are actually in the game itself
+so I won't repeat myself here. However, I have fixed some of the hardcoding that was present in the original
+(and there are also issue with how answers weren't validated properly, but that is why I have a utils file).
+
+Oh, the list of English words can be found here (https://pypi.org/project/english-words/).
 
 ## Updates
 **22 July 2023**
