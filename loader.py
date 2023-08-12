@@ -5,6 +5,7 @@ import time
 import computer_nightmare
 import number_wizard
 import ghost_guzzler
+import spiderwoman
 
 #Function that displays the games available, and allows the user to select them
 def select_game():
@@ -17,7 +18,7 @@ def select_game():
 		print("1) Computer Nightmare")
 		print("2) The Number Wizard")
 		print("3) Ghost Guzzler")
-		print("4) *Spiderwoman")
+		print("4) Spiderwoman")
 		print("5) *Gravedigger")
 		print("6) *Mad House")
 		print("7) *Ghost Maze")
@@ -39,8 +40,7 @@ def select_game():
 		elif response == "3":
 			start_game("Ghost Guzzler",ghost_guzzler)
 		elif response == "4":
-			pass
-			#start_game("Beat the Bug Eyes",beat_bug)
+			start_game("Spiderwoman",spiderwoman)
 		elif response == "5":
 			pass
 			#start_game("Moonlander",moonlander)	

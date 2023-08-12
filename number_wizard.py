@@ -11,7 +11,7 @@ Author: Daniel Isaaman & Jenny Tyler
 Translator: David Sarkies
 Version: 0
 Date: 20 October 2022
-Source: https://drive.google.com/file/d/0Bxv0SsvibDMTNlMwTi1PTlVxc2M/view?resourcekey=0-kaU6eyAmIVhT3_H8RkHfHA
+Source: https://ia601902.us.archive.org/3/items/Creepy_Computer_Games_1983_Usborne_Publishing/Creepy_Computer_Games_1983_Usborne_Publishing.pdf
 This game can be found on page 4 of Creepy Computer Games, and it a python3 translation.
 
 The goal of this game is to match the total number of the wizard's roll, using only numbers that are available.
