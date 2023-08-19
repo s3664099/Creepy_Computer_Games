@@ -3,6 +3,8 @@
 import loader
 import sys
 import util
+import time
+import gravedigger_setup as setup
 from random import randint
 
 """
@@ -27,49 +29,90 @@ instructions = "{}your way. The holes you dig are marked 0 and you are * and the
 instructions = "{}are *. See if you can escape.".format(instructions)
 
 holes = 5
-player = "*"
-stone = "+"
-hole = "O"
-wall = ":"
-skeleton = "X"
-space = " "
 
 def main_game():
-	board = create_board()
+
+	finished = False
+	board = setup.create_board()
+
+	#Main Loop
+	while not finished:
+		display_board(board)
+		action = get_action()
+
+		if action == 'Q':
+			finished = True
+		else:
+			process_action(action,board)
+
+def display_board(board):
 
 	display = ""
-	"""
+	util.clear_screen()
+
 	for x in range(10):
 		for y in range(20):
 			display += board[x][y]
 		display += "\n"
+
 	print(display)
-	"""
-def create_board():
 
-	board = [[0 for x in range(20)] for y in range(10)] 
+#Main input for the game
+def get_action():
 
-	for x in range(10):
-		for y in range(20):
-			board[x][y] = " "
+	correct = False
+	entry = ""
 
-	return populate_board(board)
+	#Checks if the action is correct
+	while not correct:
+		print()
+		print("You can go N,S,E, or W")
+		print("[Q]uit or [D]ig")
+		action = input("Enter Move: ")
+		entry = action[0].upper()
 
-def populate_board(board):
+		if entry not in ['N','S','E','W','Q','D']:
+			print ("Please enter N,S,E, W, Q or D")
+		else:
+			correct = True
 
-	for x in range(20):
-		board[0][x] = wall
-		board[9][x] = wall
+	return entry
 
-	for x in range(10):
-		board[x][0] = wall
-		board[x][19] = wall
+#Checks result of action
+def process_action(action,board):
 
-	return board
+	position = setup.player_position
+	new_position = ()
+
+	#Processes movement
+	if action == "N":
+		new_position = (position[0]-1,position[1])
+	elif action == "S":
+		new_position = (position[0]+1,position[1])
+	elif action == "E":
+		new_position = (position[0],position[1]+1)
+	else:
+		new_position = (position[0],position[1]-1)
+
+	#Gets what is on the next position
+	old_space = board[position[0]][position[1]]
+	next_space = board[new_position[0]][new_position[1]]
+
+	#Checks if it is a valid move
+	if next_space in [setup.wall,setup.stone]:
+		print("That way is blocked")
+		time.sleep(2)
+	elif new_position == (8,19):
+		print("You have escaped")
+		time.sleep(2)
+	else:
+		board[position[0]][position[1]] = setup.space
+		board[new_position[0]][new_position[1]] = setup.player
+		setup.player_position = new_position
 
 
 
 
 #Passes the current file as a module to the loader
 if __name__ == '__main__':
-	loader.start_game("Starship Takeoff",sys.modules[__name__])
+	loader.start_game("Gravedigger",sys.modules[__name__])
