@@ -45,7 +45,12 @@ def main_game():
 	while not finished:
 
 		result = 0
-		action = get_action()
+		action = ""
+
+		while action == "":
+			action = graphics.get_keypress()
+	
+		#action = get_action()
 		score +=1
 
 		if action == 'Q':

@@ -58,6 +58,30 @@ def update_screen(display,board):
 
 	pygame.display.update()
 
+def get_keypress():
+
+	events = pygame.event.get()
+	key = ""
+
+	for event in events:
+		if event.type == pygame.KEYDOWN:
+			if event.key == pygame.K_UP or event.key == pygame.K_n:
+				key = "N"
+			elif event.key == pygame.K_DOWN or event.key == pygame.K_s:
+				key = "S"
+			elif event.key == pygame.K_LEFT or event.key == pygame.K_w:
+				key = "W"
+			elif event.key == pygame.K_RIGHT or event.key == pygame.K_e:
+				key = "E"
+			elif event.key == pygame.K_q:
+				key = "Q"
+			elif event.key == event.key == pygame.K_d:
+				key = "D"
+			elif event.key == pygame.K_SPACE or event.key == pygame.K_x:
+				key = "X"			
+
+	return key
+
 """
 Skeleton - https://www.flaticon.com/free-icons/skeleton Skeleton icons created by Freepik - Flaticon
 Gravestone - https://www.flaticon.com/free-icons/death Death icons created by Eucalyp - Flaticon
