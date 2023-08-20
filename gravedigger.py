@@ -40,13 +40,17 @@ def main_game():
 	while not finished:
 		display_board(board)
 		action = get_action()
+		score +=1
 
 		if action == 'Q':
 			finished = True
 		elif action == 'D':
 			holes = dig_hole(board,holes)
 		else:
-			result = process_action(action,board,holes)
+			result = process_action(action,board)
+
+			move_skeletions(board)
+			time.sleep(2)
 
 		if result != 0:
 			finished = True
@@ -90,18 +94,9 @@ def get_action():
 def process_action(action,board):
 
 	position = setup.player_position
-	new_position = ()
 	finished = 0
 
-	#Processes movement
-	if action == "N":
-		new_position = (position[0]-1,position[1])
-	elif action == "S":
-		new_position = (position[0]+1,position[1])
-	elif action == "E":
-		new_position = (position[0],position[1]+1)
-	else:
-		new_position = (position[0],position[1]-1)
+	new_position = process_move(action,position)
 
 	#Gets what is on the next position
 	old_space = board[position[0]][position[1]]
@@ -134,6 +129,31 @@ def dig_hole(board,holes):
 	else:
 		holes -=1
 		board[setup.player_position[0]][setup.player_position[0]] = hole
+
+#Processes the skeleton's move
+def move_skeletions(board):
+
+	direction = ['N','S','E','W']
+
+	for x in setup.skeleton_position:
+		print(direction[randint(0,3)])
+
+#Determines where the next position happens to be
+def process_move(action,position):
+
+	new_position = ""
+
+	#Processes movement
+	if action == "N":
+		new_position = (position[0]-1,position[1])
+	elif action == "S":
+		new_position = (position[0]+1,position[1])
+	elif action == "E":
+		new_position = (position[0],position[1]+1)
+	else:
+		new_position = (position[0],position[1]-1)
+
+	return new_position
 
 #Displays the end game result
 def display_result(result):
