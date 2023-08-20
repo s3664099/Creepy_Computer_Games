@@ -8,6 +8,7 @@ import gravedigger_setup as setup
 import gravedigger_pygame as graphics
 from random import randint
 
+
 """
 Title: Gravedigger
 Author: Alan Ramsey
@@ -16,6 +17,12 @@ Version: 0
 Date: 18 August 2023
 Source: https://ia601902.us.archive.org/3/items/Creepy_Computer_Games_1983_Usborne_Publishing/Creepy_Computer_Games_1983_Usborne_Publishing.pdf
 This game can be found on page 10 of Creepy Computer Games, and it a python3 translation.
+
+I have decided to add a graphical version of this game, though I have to admit that you need to have pygame installed, even if you don't want to
+play the graphical version. Mind you, these games were designed for beginners to write, and while these days writing graphical programs are much
+easier, it does show how you can write a decent style game using only characters back in the day.
+
+However, we are not back in the day, so I decided to add a graphical version.
 
 """
 

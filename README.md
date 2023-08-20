@@ -58,6 +58,16 @@ so I won't repeat myself here. However, I have fixed some of the hardcoding that
 
 Oh, the list of English words can be found here (https://pypi.org/project/english-words/).
 
+**Gravedigger**
+I decided to do something slightly different here and that is to add a graphical option. I actually added a 
+query as to whether to play the graphical or the character version of the game, though as it turns out, if you
+don't have pygame installed then this game will basically crash (there is a way, according to ChatGPT, that you
+can ignore it, but I'm not going to bother - so, you need to have pygame installed).
+Anyway, this is a game where you have to escape from a graveyard. You can dig up to five holes. You also need
+to avoid the skeletons. I have added code so that if you are next to a skeleton, the skeleton will 'attack'.
+One issue is that there is the positioning of the gravestones is completely random, so it is possible, or shall
+I say likely, that the exit can be blocked.
+
 ## Updates
 **22 July 2023**
 Created the initial folder to hold the contents on the game.
