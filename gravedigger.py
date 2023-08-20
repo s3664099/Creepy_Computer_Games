@@ -28,10 +28,11 @@ instructions = "{}Grave stones (marked +) and the walls of the graveyard (marked
 instructions = "{}your way. The holes you dig are marked 0 and you are * and the Skeletons\n".format(instructions)
 instructions = "{}are *. See if you can escape.".format(instructions)
 
-holes = 5
-
 def main_game():
 
+	holes = 5
+	score = 0
+	result = 0
 	finished = False
 	board = setup.create_board()
 
@@ -42,8 +43,15 @@ def main_game():
 
 		if action == 'Q':
 			finished = True
+		elif action == 'D':
+			holes = dig_hole(board,holes)
 		else:
-			process_action(action,board)
+			result = process_action(action,board,holes)
+
+		if result != 0:
+			finished = True
+
+	print(display_result(result))		
 
 def display_board(board):
 
@@ -83,6 +91,7 @@ def process_action(action,board):
 
 	position = setup.player_position
 	new_position = ()
+	finished = 0
 
 	#Processes movement
 	if action == "N":
@@ -103,15 +112,43 @@ def process_action(action,board):
 		print("That way is blocked")
 		time.sleep(2)
 	elif new_position == (8,19):
-		print("You have escaped")
-		time.sleep(2)
+		finished = 1
+	elif new_position in [setup.hole]:
+		finished = 2
+	elif new_position in [setup.skeleton]:
+		finished = 3
 	else:
 		board[position[0]][position[1]] = setup.space
 		board[new_position[0]][new_position[1]] = setup.player
 		setup.player_position = new_position
 
+	return finished
 
+#Processes the Dig Hole Action
+def dig_hole(board,holes):
 
+	#Checks if the player is able to dig any more holes
+	if holes == 0:
+		print('You are unable to dig anymore holes')
+		time.sleep(2)
+	else:
+		holes -=1
+		board[setup.player_position[0]][setup.player_position[0]] = hole
+
+#Displays the end game result
+def display_result(result):
+
+	response = ""
+
+	if result == 1:
+		response = "You're Free **\n"
+		response = "Your performance rating is {}".format(int(60-score)/60*(96+holes))
+	elif result == 2:
+		response = "You've fallen into one of your own holes"
+	elif result == 3:
+		response = "You've been scared to death by a skeleton"
+
+	return response
 
 #Passes the current file as a module to the loader
 if __name__ == '__main__':
