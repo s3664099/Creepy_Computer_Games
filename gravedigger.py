@@ -34,14 +34,12 @@ def main_game():
 	score = 0
 	finished = False
 	board = setup.create_board()
+	display_board(board)
 
 	#Main Loop
 	while not finished:
 
 		result = 0
-
-		setup.place_holes(board)
-		display_board(board)
 		action = get_action()
 		score +=1
 
@@ -52,6 +50,9 @@ def main_game():
 		else:
 			result = process_action(action,board)
 			result = move_skeletions(board,result)
+
+		setup.place_holes(board)
+		display_board(board)
 
 		if result != 0:
 			finished = True
