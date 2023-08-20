@@ -5,6 +5,7 @@ import sys
 import util
 import time
 import gravedigger_setup as setup
+import gravedigger_pygame as graphics
 from random import randint
 
 """
@@ -30,11 +31,15 @@ instructions = "{}are *. See if you can escape.".format(instructions)
 
 def main_game():
 
+	graphics.set_caption("Gravedigger")
+	display = graphics.display_screen()
+
 	holes = 5
 	score = 0
 	finished = False
 	board = setup.create_board()
 	display_board(board)
+	graphics.update_screen(display,board)
 
 	#Main Loop
 	while not finished:
@@ -53,6 +58,7 @@ def main_game():
 
 		setup.place_holes(board)
 		display_board(board)
+		graphics.update_screen(display,board)
 
 		if result != 0:
 			finished = True
