@@ -51,10 +51,8 @@ def main_game():
 			holes = dig_hole(board,holes)
 		else:
 			result = process_action(action,board)
-			move_skeletions(board)
+			result = move_skeletions(board,result)
 
-		print(result)
-		print(holes)
 		time.sleep(0.5)
 
 		if result != 0:
@@ -140,11 +138,12 @@ def dig_hole(board,holes):
 	return holes
 
 #Processes the skeleton's move
-def move_skeletions(board):
+def move_skeletions(board,result):
 
 	direction = ['N','S','E','W']
 
 	skel_number = 0
+	skeletons_removal = []
 
 	for x in setup.skeleton_position:
 
@@ -160,7 +159,25 @@ def move_skeletions(board):
 				board[new_position[0]][new_position[1]] = setup.skeleton
 				setup.skeleton_position[skel_number] = (new_position[0],new_position[1])
 
+				#Skeleton has moved into a player's spot
+				if next_space in [setup.player]:
+					result = 3
+
+				#Skeleton has moved into a hole
+				elif next_space in [setup.hole]:
+
+					#Adds the index to skkeletons being removed and returns it to a hole
+					skeletons_removal.append(skel_number)
+					board[new_position[0]][new_position[1]] = setup.hole
+
 		skel_number += 1
+
+	#Removes the skeleton from the list
+	#Iterates in reverse so as not to cause problems
+	for x in reversed(skeletons_removal):
+		setup.skeleton_position.pop(x)
+
+	return result
 
 #Determines where the next position happens to be
 def process_move(action,position):
