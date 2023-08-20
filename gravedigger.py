@@ -35,9 +35,9 @@ def main_game():
 	graphic_display = False
 
 	print("Do you want a graphical display:")
-	answer = util.yes_or_not("Y")
+	answer = util.yes_or_no("Y")
 
-	if answer == "Y":
+	if answer == True:
 		graphic_display = True
 
 	if graphic_display:
