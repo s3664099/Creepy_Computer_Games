@@ -8,6 +8,7 @@ skeleton = "X"
 space = " "
 player_position = (2,2)
 skeleton_position = [(4,18),(3,18),(2,18)]
+hole_position = []
 
 def create_board():
 
@@ -47,6 +48,11 @@ def place_walls(board):
 
 	#Sets the exit
 	board[8][19] = " "
+
+def place_holes(board):
+
+	for x in hole_position:
+		board[x[0]][x[1]] = hole
 
 def populate_board(board):
 

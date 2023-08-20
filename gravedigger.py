@@ -32,12 +32,15 @@ def main_game():
 
 	holes = 5
 	score = 0
-	result = 0
 	finished = False
 	board = setup.create_board()
 
 	#Main Loop
 	while not finished:
+
+		result = 0
+
+		setup.place_holes(board)
 		display_board(board)
 		action = get_action()
 		score +=1
@@ -48,14 +51,16 @@ def main_game():
 			holes = dig_hole(board,holes)
 		else:
 			result = process_action(action,board)
-
 			move_skeletions(board)
-			time.sleep(2)
+
+		print(result)
+		print(holes)
+		time.sleep(0.5)
 
 		if result != 0:
 			finished = True
 
-	print(display_result(result))		
+	print(display_result(result,score))		
 
 def display_board(board):
 
@@ -79,12 +84,12 @@ def get_action():
 	while not correct:
 		print()
 		print("You can go N,S,E, or W")
-		print("[Q]uit or [D]ig")
+		print("[Q]uit, [D]ig, [X] (Do Nothing)")
 		action = input("Enter Move: ")
 		entry = action[0].upper()
 
-		if entry not in ['N','S','E','W','Q','D']:
-			print ("Please enter N,S,E, W, Q or D")
+		if entry not in ['N','S','E','W','Q','D','X']:
+			print ("Please enter N,S,E, W, Q, D or X")
 		else:
 			correct = True
 
@@ -108,9 +113,9 @@ def process_action(action,board):
 		time.sleep(2)
 	elif new_position == (8,19):
 		finished = 1
-	elif new_position in [setup.hole]:
+	elif next_space in [setup.hole]:
 		finished = 2
-	elif new_position in [setup.skeleton]:
+	elif next_space in [setup.skeleton]:
 		finished = 3
 	else:
 		board[position[0]][position[1]] = setup.space
@@ -126,22 +131,41 @@ def dig_hole(board,holes):
 	if holes == 0:
 		print('You are unable to dig anymore holes')
 		time.sleep(2)
+
+	#Creates a hole at the position selected
 	else:
 		holes -=1
-		board[setup.player_position[0]][setup.player_position[0]] = hole
+		setup.hole_position.append(((setup.player_position[0]),(setup.player_position[1])))
+
+	return holes
 
 #Processes the skeleton's move
 def move_skeletions(board):
 
 	direction = ['N','S','E','W']
 
+	skel_number = 0
+
 	for x in setup.skeleton_position:
-		print(direction[randint(0,3)])
+
+		move_valid = False
+
+		while not move_valid:
+			new_position = process_move(direction[randint(0,3)],x)
+			next_space = board[new_position[0]][new_position[1]]
+
+			if next_space not in [setup.wall,setup.stone,setup.skeleton]:
+				move_valid = True
+				board[x[0]][x[1]] = setup.space
+				board[new_position[0]][new_position[1]] = setup.skeleton
+				setup.skeleton_position[skel_number] = (new_position[0],new_position[1])
+
+		skel_number += 1
 
 #Determines where the next position happens to be
 def process_move(action,position):
 
-	new_position = ""
+	new_position = (position[0],position[1])
 
 	#Processes movement
 	if action == "N":
@@ -150,13 +174,13 @@ def process_move(action,position):
 		new_position = (position[0]+1,position[1])
 	elif action == "E":
 		new_position = (position[0],position[1]+1)
-	else:
+	elif action == "W":
 		new_position = (position[0],position[1]-1)
 
 	return new_position
 
 #Displays the end game result
-def display_result(result):
+def display_result(result,score):
 
 	response = ""
 
