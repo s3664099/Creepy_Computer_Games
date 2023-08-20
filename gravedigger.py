@@ -53,12 +53,12 @@ def main_game():
 			result = process_action(action,board)
 			result = move_skeletions(board,result)
 
-		time.sleep(0.5)
-
 		if result != 0:
 			finished = True
 
-	print(display_result(result,score))		
+	print(display_result(result,score,holes))
+
+	reset_game()		
 
 def display_board(board):
 
@@ -109,7 +109,7 @@ def process_action(action,board):
 	if next_space in [setup.wall,setup.stone]:
 		print("That way is blocked")
 		time.sleep(2)
-	elif new_position == (8,19):
+	elif new_position == setup.exit:
 		finished = 1
 	elif next_space in [setup.hole]:
 		finished = 2
@@ -150,10 +150,21 @@ def move_skeletions(board,result):
 		move_valid = False
 
 		while not move_valid:
-			new_position = process_move(direction[randint(0,3)],x)
+
+			#If the skeleton next to the player
+			new_position = check_adjacent_square(x,board)
+
+			#If not moves in a random direction
+			if new_position == (-1,-1):
+				new_position = process_move(direction[randint(0,3)],x)
+
 			next_space = board[new_position[0]][new_position[1]]
 
-			if next_space not in [setup.wall,setup.stone,setup.skeleton]:
+			#Skeletons cannot leave the graveyard
+			if new_position == setup.exit:
+				move_valid = False 
+
+			elif next_space not in [setup.wall,setup.stone,setup.skeleton]:
 				move_valid = True
 				board[x[0]][x[1]] = setup.space
 				board[new_position[0]][new_position[1]] = setup.skeleton
@@ -179,6 +190,23 @@ def move_skeletions(board,result):
 
 	return result
 
+#Checks if the skeleton is next to the player, and will
+#move into that square if that is the case
+def check_adjacent_square(position,board):
+
+	new_position = (-1,-1)
+
+	if (board[position[0]-1][position[1]] == setup.player):
+		new_position = (position[0]-1,position[1])
+	elif (board[position[0]+1][position[1]] == setup.player):
+		new_position = (position[0]+1,position[1])
+	elif (board[position[0]][position[1]-1] == setup.player):
+		new_position = (position[0],position[1]-1)
+	elif (board[position[0]][position[1]+1] == setup.player):
+		new_position = (position[0],position[1]+1)
+
+	return new_position
+
 #Determines where the next position happens to be
 def process_move(action,position):
 
@@ -197,19 +225,26 @@ def process_move(action,position):
 	return new_position
 
 #Displays the end game result
-def display_result(result,score):
+def display_result(result,score,holes):
 
 	response = ""
 
 	if result == 1:
 		response = "You're Free **\n"
-		response = "Your performance rating is {}".format(int(60-score)/60*(96+holes))
+		response = "Your performance rating is {}".format(int((60-score)/60*(96+holes)))
 	elif result == 2:
 		response = "You've fallen into one of your own holes"
 	elif result == 3:
 		response = "You've been scared to death by a skeleton"
 
 	return response
+
+#Resets the game if the player wishes to play again
+def reset_game():
+
+	setup.player_position = (2,2)
+	setup.skeleton_position = [(4,18),(3,18),(2,18)]
+	setup.hole_position = []
 
 #Passes the current file as a module to the loader
 if __name__ == '__main__':

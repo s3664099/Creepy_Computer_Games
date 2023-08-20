@@ -7,6 +7,7 @@ wall = ":"
 skeleton = "X"
 space = " "
 player_position = (2,2)
+exit = (8,19)
 skeleton_position = [(4,18),(3,18),(2,18)]
 hole_position = []
 
@@ -62,3 +63,4 @@ def populate_board(board):
 	place_skeletions(board)
 
 	return board
+
