@@ -31,26 +31,41 @@ instructions = "{}are *. See if you can escape.".format(instructions)
 
 def main_game():
 
-	graphics.set_caption("Gravedigger")
-	display = graphics.display_screen()
+	#Does the player want a graphical display
+	graphic_display = False
+
+	print("Do you want a graphical display:")
+	answer = util.yes_or_not("Y")
+
+	if answer == "Y":
+		graphic_display = True
+
+	if graphic_display:
+		graphics.set_caption("Gravedigger")
+		display = graphics.display_screen()
 
 	holes = 5
 	score = 0
 	finished = False
 	board = setup.create_board()
-	display_board(board)
-	graphics.update_screen(display,board)
 
+	if graphic_display:
+		graphics.update_screen(display,board)
+	else:
+		display_board(board)
+	
 	#Main Loop
 	while not finished:
 
 		result = 0
 		action = ""
 
-		while action == "":
-			action = graphics.get_keypress()
-	
-		#action = get_action()
+		if graphic_display:
+			while action == "":
+				action = graphics.get_keypress()
+		else:
+			action = get_action()
+
 		score +=1
 
 		if action == 'Q':
@@ -58,18 +73,23 @@ def main_game():
 		elif action == 'D':
 			holes = dig_hole(board,holes)
 		else:
-			result = process_action(action,board)
+			result = process_action(action,board,graphic_display)
 			result = move_skeletions(board,result)
 
 		setup.place_holes(board)
-		display_board(board)
-		graphics.update_screen(display,board)
+
+		if graphic_display:
+			graphics.update_screen(display,board)
+		else:
+			display_board(board)		
 
 		if result != 0:
 			finished = True
 
-	graphics.display_message(display_result(result,score,holes),display)
-	#print(display_result(result,score,holes))
+	if graphic_display:
+		graphics.display_message(display_result(result,score,holes,True),display)
+	else:
+		print(display_result(result,score,holes,False))
 
 	reset_game()		
 
@@ -107,7 +127,7 @@ def get_action():
 	return entry
 
 #Checks result of action
-def process_action(action,board):
+def process_action(action,board,graphics):
 
 	position = setup.player_position
 	finished = 0
@@ -120,8 +140,11 @@ def process_action(action,board):
 
 	#Checks if it is a valid move
 	if next_space in [setup.wall,setup.stone]:
-		print("That way is blocked")
-		time.sleep(2)
+
+		if graphics:
+			print("That way is blocked")
+			time.sleep(2)
+
 	elif new_position == setup.exit:
 		finished = 1
 	elif next_space in [setup.hole]:
@@ -238,13 +261,19 @@ def process_move(action,position):
 	return new_position
 
 #Displays the end game result
-def display_result(result,score,holes):
+def display_result(result,score,holes,graphics):
 
 	response = ""
 
 	if result == 1:
-		response = "You're Free **\n"
-		response = "Your performance rating is {}".format(int((60-score)/60*(96+holes)))
+
+		if graphics:
+			response = "You're Free - "
+		else:
+			response = "You're Free **\n"
+
+		response += "Your performance rating is {}".format(int((60-score)/60*(96+holes)))
+
 	elif result == 2:
 		response = "You've fallen into one of your own holes"
 	elif result == 3:
