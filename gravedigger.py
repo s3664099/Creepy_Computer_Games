@@ -68,7 +68,8 @@ def main_game():
 		if result != 0:
 			finished = True
 
-	print(display_result(result,score,holes))
+	graphics.display_message(display_result(result,score,holes),display)
+	#print(display_result(result,score,holes))
 
 	reset_game()		
 
