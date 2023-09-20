@@ -7,6 +7,7 @@ import number_wizard
 import ghost_guzzler
 import spiderwoman
 import gravedigger
+import mad_house
 
 #Function that displays the games available, and allows the user to select them
 def select_game():
@@ -21,7 +22,7 @@ def select_game():
 		print("3) Ghost Guzzler")
 		print("4) Spiderwoman")
 		print("5) Gravedigger")
-		print("6) *Mad House")
+		print("6) Mad House")
 		print("7) *Ghost Maze")
 		print("8) *Seance")
 		print("X) Exit")
@@ -45,8 +46,7 @@ def select_game():
 		elif response == "5":
 			start_game("Gravedigger",gravedigger)	
 		elif response == "6":
-			pass
-			#start_game("Monsters of Galacticon",monsters_galacticon)
+			start_game("Mad House",mad_house)
 		elif response == "7":
 			pass
 			#start_game("Alien Snipers",alien_sniper)
