@@ -39,6 +39,7 @@ def main_game():
 		display(footsteps,width,door_position)
 		time.sleep(2)
 		footsteps -=1
+		#----------Line 230 - Winning Position ------------
 
 #Displays the screen
 def display(footsteps,width,door_position):
