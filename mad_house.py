@@ -33,13 +33,19 @@ def main_game():
 	footsteps = 240
 	door_position = [randint(1,(width-4)+1),randint(1,(width-4)+1),randint(1,(width-4)+1)]
 	door_direction = [1,0,-1]
+	finished = 0
 	
 	#Main game loop
-	while (footsteps>0):
+	while (finished == 0):
 		display(footsteps,width,door_position)
+
+		#<------------------ display commands ---------------->
+		#<------------------ Get Command - line 240 ---------->
 		time.sleep(2)
+		#<------------------ Change Door Position ------------>
+
 		footsteps -=1
-		#----------Line 230 - Winning Position ------------
+		finished = check_results(finished,footsteps,door_position)
 
 #Displays the screen
 def display(footsteps,width,door_position):
@@ -58,12 +64,25 @@ def display_walls(width,door):
 	for x in range(width):
 
 		if (x==door):
-			line = "{}> <".format(line)
+			line = "{} ".format(line)
+		elif (x==door-1):
+			line = "{}>".format(line)
+		elif (x==door+1):
+			line = "{}<".format(line)
 		else:
 			line = "{}*".format(line)
 
 	return line
 
+#Checks if the game has ended.
+def check_results(finished,footsteps,door_position):
+
+	if (footsteps == 0):
+		finished = 1
+	elif ((door_position[0] == door_position[1]) and (door_position[1] == door_position[2])):
+		finished = 2
+
+	return finished	
 
 #Passes the current file as a module to the loader
 if __name__ == '__main__':
