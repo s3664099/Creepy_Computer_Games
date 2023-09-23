@@ -68,6 +68,12 @@ to avoid the skeletons. I have added code so that if you are next to a skeleton,
 One issue is that there is the positioning of the gravestones is completely random, so it is possible, or shall
 I say likely, that the exit can be blocked.
 
+**Mad House**
+This is another one of those interesting games. You have three doors which you have to line up to be able to
+escape. The catch is that you can only control the first and third door by setting the direction that they move.
+The second door will move randomly every twenty-five turns. You also have a time limit, namely steps that count
+down every turn.
+
 ## Updates
 **22 July 2023**
 Created the initial folder to hold the contents on the game.
@@ -75,3 +81,9 @@ Added Computer Nightmare
 
 **30 July 2023**
 Added the Number Wizard Game
+
+**20 August 2023**
+Added gravedigger game. Made the game graphical as well.
+
+**23 September 2023**
+Added Mad House game

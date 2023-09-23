@@ -7,13 +7,15 @@ from random import randint
 import time
 
 """
-Title: 
-Author: 
+Title: Mad House
+Author: Keith Campbell
 Translator: David Sarkies
 Version: 0.1
 Date: 
 Source: https://ia601902.us.archive.org/3/items/Creepy_Computer_Games_1983_Usborne_Publishing/Creepy_Computer_Games_1983_Usborne_Publishing.pdf
 This game can be found on page 12 of Creepy Computer Games, and it a python3 translation.
+
+In this game you control two doors, and you have to line it up with the third, that will move randomly every twenty-five turns.
 """
 
 instructions = "You're trapped in a weird house where everything moves including the walls. If\n"
