@@ -46,9 +46,11 @@ def main_game():
 		else:
 			finished = 3
 
-		door_position = move_doors(door_position,door_direction,width)
+		door_position = move_doors(door_position,door_direction,width,footsteps)
 		footsteps -=1
 		finished = check_results(finished,footsteps,door_position)
+
+	end_game(finished)
 
 #Displays the screen
 def display(footsteps,width,door_position):
@@ -103,7 +105,7 @@ def process_action(action,door_direction):
 
 	return door_direction
 
-def move_doors(door_position,door_direction,width):
+def move_doors(door_position,door_direction,width,footsteps):
 
 	#Checks if the doors have reached the end of the row
 	#If not, moves the door in the set directions
@@ -113,6 +115,14 @@ def move_doors(door_position,door_direction,width):
 	if (((door_position[2]>1) and (door_direction[2] == -1)) 
 		or ((door_position[2]<width-2) and (door_direction[2]==1))):
 		door_position[2] += door_direction[2]
+
+	#Middle door moves every 5 moves. If it moves
+	#beyond the width it goes back to the beginning
+	if (footsteps/25==int(footsteps/25)):
+		door_position[1] +=randint(0,20)-10
+
+		if (door_position[1] >width-2):
+			door_position[1] = 2 
 
 	return door_position
 	
@@ -126,6 +136,14 @@ def check_results(finished,footsteps,door_position):
 		finished = 2
 
 	return finished	
+
+def end_game(finished):
+
+	if (finished == 1):
+		print("Too Late! The footsteps have stopped")
+		print("AGGGHHHH!!!!")
+	elif (finished == 2):
+		print("You are free!")		
 
 #Passes the current file as a module to the loader
 if __name__ == '__main__':
