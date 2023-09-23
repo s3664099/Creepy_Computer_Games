@@ -29,6 +29,7 @@ instructions = "{}of the screen shows their progress towards you. If you can't e
 instructions = "{} before the phantom footsteps catch up with you ...".format(instructions)
 
 def main_game():
+
 	width = 31
 	footsteps = 240
 	door_position = [randint(1,(width-4)+1),randint(1,(width-4)+1),randint(1,(width-4)+1)]
@@ -38,12 +39,14 @@ def main_game():
 	#Main game loop
 	while (finished == 0):
 		display(footsteps,width,door_position)
+		print(door_direction)
+		action = get_action()
+		if (action != 'q'):
+			door_direction = process_action(action,door_direction)
+		else:
+			finished = 3
 
-		#<------------------ display commands ---------------->
-		#<------------------ Get Command - line 240 ---------->
-		time.sleep(2)
-		#<------------------ Change Door Position ------------>
-
+		door_position = move_doors(door_position,door_direction,width)
 		footsteps -=1
 		finished = check_results(finished,footsteps,door_position)
 
@@ -56,10 +59,16 @@ def display(footsteps,width,door_position):
 		print(display_walls(width,door_position[x]))
 		print()
 
+	#Commands
+	print("\t\tx <-   Top Wall  -> c")
+	print("\t\tm <- Bottom Wall -> n")
+	print("\t\t\tq - quit")
+
+
 #Builds each of the doors and positions them
 def display_walls(width,door):
 
-	line = ""
+	line = "\t"
 
 	for x in range(width):
 
@@ -73,6 +82,40 @@ def display_walls(width,door):
 			line = "{}*".format(line)
 
 	return line
+
+#Function to get user command
+def get_action():
+
+	action = util.input_with_timeout_no_comment("",2)
+	return action
+
+#Processes the player action
+def process_action(action,door_direction):
+
+	if (action =="x"):
+		door_direction[0] = -1
+	elif (action == "c"):
+		door_direction[0] = 1
+	elif (action == "m"):
+		door_direction[2] = -1
+	elif (action == "n"):
+		door_direction[2] = 1
+
+	return door_direction
+
+def move_doors(door_position,door_direction,width):
+
+	#Checks if the doors have reached the end of the row
+	#If not, moves the door in the set directions
+	if (((door_position[0]>1) and door_direction[0]==-1) 
+		or ((door_position[0]<width-2) and door_direction[0]==1)):
+		door_position[0] += door_direction[0]
+	if (((door_position[2]>1) and (door_direction[2] == -1)) 
+		or ((door_position[2]<width-2) and (door_direction[2]==1))):
+		door_position[2] += door_direction[2]
+
+	return door_position
+	
 
 #Checks if the game has ended.
 def check_results(finished,footsteps,door_position):
