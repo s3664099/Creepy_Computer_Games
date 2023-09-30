@@ -30,7 +30,61 @@ instructions = "{}N: Turns you left (through 90 degrees)\n".format(instructions)
 instructions = "{}M: Turns you right (through 90 degrees)\n".format(instructions)
 
 def main_game():
-	pass
+
+	#Set size of maze
+	maze_width = 20
+	maze_height = 7
+	maze_array = build_maze([])
+	player_grid = [[]]
+	grid_row = []
+	ghost_move = -1
+	print(maze_array)
+	ghosts_pos = position_ghost(maze_array,0)
+	player_location = place_player(maze_array)
+	print(maze_array)
+
+#Builds the maze
+def build_maze(maze_array):
+
+	maze = ""
+	maze = "{}0000000000".format(maze)
+	maze = "{}0111100110".format(maze)
+	maze = "{}0010011100".format(maze)
+	maze = "{}0011010110".format(maze)
+	maze = "{}0110100100".format(maze)
+	maze = "{}0011111100".format(maze)
+	maze = "{}0000009000".format(maze)
+
+	for x in maze:
+		maze_array.append(int(x))
+
+	return maze_array
+
+#Positions the player on the map
+def place_player(maze_array):
+
+	player_location = 0
+
+	#Checks that the position is not a wall
+	while (maze_array[player_location] == 0):
+		player_location = randint(0,len(maze_array))
+
+	return player_location
+
+#Moves the ghost
+def position_ghost(maze_array,ghosts_pos):
+
+	#Returns the ghost position to a space
+	if maze_array[ghosts_pos] == 2:
+		maze_array[ghosts_pos] = 1
+
+	#Checks that the ghost is not in a wall
+	while (maze_array[ghosts_pos] == 0):
+		ghosts_pos = randint(0,len(maze_array))
+
+	maze_array[ghosts_pos] = 2
+
+	return ghosts_pos
 
 #Passes the current file as a module to the loader
 if __name__ == '__main__':
