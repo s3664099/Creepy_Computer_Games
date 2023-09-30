@@ -31,17 +31,94 @@ instructions = "{}M: Turns you right (through 90 degrees)\n".format(instructions
 
 def main_game():
 
-	#Set size of maze
-	maze_width = 20
+	#Set up the game
+	maze_width = 10
 	maze_height = 7
 	maze_array = build_maze([])
-	player_grid = [[]]
-	grid_row = []
 	ghost_move = -1
-	print(maze_array)
+	move = 0
 	ghosts_pos = position_ghost(maze_array,0)
+	ghost_move += 1
 	player_location = place_player(maze_array)
-	print(maze_array)
+	player_facing = randint(0,4)
+
+	playing = True
+
+	while (playing):
+
+		#Checks if player is next to a ghost
+		if(check_position(ghosts_pos,player_location,maze_width)):
+			player_location = place_player(maze_array)
+			ghosts_pos = position_ghost(maze_array,ghosts_pos)
+			move = 0
+			ghost_move += 1
+
+		#Checks if it is time for the ghost to move
+		if (move == 5):
+			ghosts_pos = position_ghost(maze_array,ghosts_pos)
+			move = 0
+			ghost_move += 1			
+
+		display_position(player_facing,maze_array,player_location,maze_width)
+"""
+		display_position(0,maze_array,42,maze_width)
+		print()
+		display_position(1,maze_array,42,maze_width)
+		print()
+		display_position(2,maze_array,42,maze_width)
+		print()
+		display_position(3,maze_array,42,maze_width)
+
+		playing = False;
+"""
+
+def display_position(facing,maze_array,player_location,width):
+
+	display_grid = []
+
+	for x in range(4):
+
+		grid_row = []
+		spot = x-1
+
+		if (facing == 0):
+			grid_row.append(player_location+width*spot+1)
+			grid_row.append(player_location+width*spot)
+			grid_row.append(player_location+width*spot-1)
+		elif (facing == 1):
+			grid_row.append(player_location+width+spot)
+			grid_row.append(player_location+spot)
+			grid_row.append(player_location-width+spot)
+		elif (facing == 2):
+			grid_row.append(player_location+width*spot-1)
+			grid_row.append(player_location+width*spot)
+			grid_row.append(player_location+width*spot+1)
+		else:
+			grid_row.append(player_location-spot-width)
+			grid_row.append(player_location-spot)
+			grid_row.append(player_location-spot+width)
+
+		display = []	
+
+		for y in range(3):
+
+			if maze_array[grid_row[y]] == 0:
+				display.append("#")
+			elif maze_array[grid_row[y]] == 1:
+				display.append(".")
+			elif maze_array[grid_row[y]] == 2:
+				display.append("G")
+			else:
+				display.append("X")
+
+		display_grid.append(display)
+	#display_grid[1][2] = "Y"
+
+	for x in range(3):
+		view = ""
+		for y in range(3):
+			view = "{}{}".format(view,display_grid[x][y])
+		print(view)
 
 #Builds the maze
 def build_maze(maze_array):
@@ -85,6 +162,17 @@ def position_ghost(maze_array,ghosts_pos):
 	maze_array[ghosts_pos] = 2
 
 	return ghosts_pos
+
+#Checks if the player is next to the ghost
+def check_position(ghost,player,width):
+
+	position = False
+
+	if ((player+width == ghost) or (player-width == ghost)
+		or (player+1 == ghost) or (player-1 == ghost)):
+		position = True
+
+	return position
 
 #Passes the current file as a module to the loader
 if __name__ == '__main__':
