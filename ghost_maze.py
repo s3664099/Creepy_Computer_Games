@@ -57,20 +57,39 @@ def main_game():
 		if (move == 5):
 			ghosts_pos = position_ghost(maze_array,ghosts_pos)
 			move = 0
-			ghost_move += 1			
+			ghost_move += 1		
 
 		display_position(player_facing,maze_array,player_location,maze_width)
-"""
-		display_position(0,maze_array,42,maze_width)
-		print()
-		display_position(1,maze_array,42,maze_width)
-		print()
-		display_position(2,maze_array,42,maze_width)
-		print()
-		display_position(3,maze_array,42,maze_width)
 
-		playing = False;
-"""
+		move = get_input()
+
+		if (move.lower() == "q"):
+			playing = False
+		elif (move.lower() == "m"):
+			player_facing += 1
+
+			if (player_facing == 4):
+				player_facing = 0
+		elif (move.lower() == "n"):
+
+			player_facing -= 1
+			if (player_facing == -1):
+				player_facing = 3
+
+		elif (move.lower() == "x"):
+			if ((player_facing == 0) and (maze_array[player_location-10] != 0)):
+				player_location -=10
+			elif ((player_facing == 1) and (maze_array[player_location+10] !=0)):
+				player_location += 10
+			elif ((player_facing == 2) and (maze_array[player_location+1] !=0)):
+				player_location += 1
+			elif ((player_facing == 3) and (maze_array[player_location-1] !=0)):
+				player_location -= 1
+
+		if (maze_array[player_location] == 9):
+			print("You have escaped in {} moves".format(ghost_move*5+move))
+			playing = False
+
 
 def display_position(facing,maze_array,player_location,width):
 
@@ -136,6 +155,22 @@ def build_maze(maze_array):
 		maze_array.append(int(x))
 
 	return maze_array
+
+#Gets player input
+def get_input():
+
+	correct = False
+	action = ""
+
+	#Checks if valid action
+	while(not correct):
+
+		action = input()
+		if ((action.lower() == "m") or (action.lower() == "n") or (action.lower() == "x") or (action.lower() == "q")):
+			correct = True
+
+	return action
+
 
 #Positions the player on the map
 def place_player(maze_array):
