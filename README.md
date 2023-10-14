@@ -87,3 +87,6 @@ Added gravedigger game. Made the game graphical as well.
 
 **23 September 2023**
 Added Mad House game
+
+**1 October 2023**
+Added Ghost Maze Game. Completed basic code. Testing for errors and preparing for graphics.

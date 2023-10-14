@@ -46,6 +46,9 @@ def main_game():
 
 	while (playing):
 
+		print(player_location)
+		print(ghosts_pos)
+
 		#Checks if player is next to a ghost
 		if(check_position(ghosts_pos,player_location,maze_width)):
 			player_location = place_player(maze_array)
@@ -61,49 +64,62 @@ def main_game():
 
 		display_position(player_facing,maze_array,player_location,maze_width)
 
-		move = get_input()
+		action = get_input()
 
-		if (move.lower() == "q"):
+		if (action.lower() == "q"):
 			playing = False
-		elif (move.lower() == "m"):
-			player_facing += 1
-
-			if (player_facing == 4):
-				player_facing = 0
-		elif (move.lower() == "n"):
-
-			player_facing -= 1
-			if (player_facing == -1):
-				player_facing = 3
-
-		elif (move.lower() == "x"):
+		elif ((action.lower()=="m") or (action.lower()=="n")):
+			player_facing = change_facing(action.lower(),player_facing)
+		elif (action.lower() == "x"):
 			if ((player_facing == 0) and (maze_array[player_location-10] != 0)):
 				player_location -=10
-			elif ((player_facing == 1) and (maze_array[player_location+10] !=0)):
+			elif ((player_facing == 2) and (maze_array[player_location+10] !=0)):
 				player_location += 10
-			elif ((player_facing == 2) and (maze_array[player_location+1] !=0)):
+			elif ((player_facing == 1) and (maze_array[player_location+1] !=0)):
 				player_location += 1
 			elif ((player_facing == 3) and (maze_array[player_location-1] !=0)):
 				player_location -= 1
+			else:
+				print("You cannot go there")
 
 		if (maze_array[player_location] == 9):
 			print("You have escaped in {} moves".format(ghost_move*5+move))
 			playing = False
 
+		move += 1
+
+#Changes the player's facing
+def change_facing(action, player_facing):
+
+	#Turn Left?
+	if (action == "m"):
+		player_facing += 1
+
+		if (player_facing == 4):
+			player_facing = 0
+
+	#Turn right
+	elif (action == "n"):
+		player_facing -= 1
+
+		if (player_facing == -1):
+			player_facing = 3
+
+	return player_facing
 
 def display_position(facing,maze_array,player_location,width):
 
 	display_grid = []
 
-	for x in range(4):
+	for x in range(3):
 
 		grid_row = []
 		spot = x-1
 
 		if (facing == 0):
-			grid_row.append(player_location+width*spot+1)
-			grid_row.append(player_location+width*spot)
-			grid_row.append(player_location+width*spot-1)
+			grid_row.append(player_location-width*spot+1)
+			grid_row.append(player_location-width*spot)
+			grid_row.append(player_location-width*spot-1)
 		elif (facing == 1):
 			grid_row.append(player_location+width+spot)
 			grid_row.append(player_location+spot)
@@ -131,7 +147,7 @@ def display_position(facing,maze_array,player_location,width):
 				display.append("X")
 
 		display_grid.append(display)
-	#display_grid[1][2] = "Y"
+	display_grid[1][1] = "Y"
 
 	for x in range(3):
 		view = ""
@@ -192,7 +208,7 @@ def position_ghost(maze_array,ghosts_pos):
 
 	#Checks that the ghost is not in a wall
 	while (maze_array[ghosts_pos] == 0):
-		ghosts_pos = randint(0,len(maze_array))
+		ghosts_pos = randint(0,len(maze_array-1))
 
 	maze_array[ghosts_pos] = 2
 
