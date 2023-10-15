@@ -10,8 +10,8 @@ from maze_generator import generate_maze
 Title: Ghost Maze
 Author: Colin Reynolds
 Translator: David Sarkies
-Version: 0.2
-Date: 14 October 2023
+Version: 0.3
+Date: 15 October 2023
 Source: https://ia601902.us.archive.org/3/items/Creepy_Computer_Games_1983_Usborne_Publishing/Creepy_Computer_Games_1983_Usborne_Publishing.pdf
 This game can be found on page 14 of Creepy Computer Games, and it a python3 translation.
 
@@ -33,18 +33,17 @@ instructions = "{}M: Turns you right (through 90 degrees)\n".format(instructions
 def main_game():
 
 	#Set up the game
-	maze_width = 11	#For a generated maze, the width needs to be an odd number
-	maze_height = 7
-	maze_array = build_maze([],True,maze_width)
+	maze_width = 5
+	maze_height = 3
+	maze_array = build_maze([],True,maze_height,maze_width)
+	maze_width = maze_width*2+1
+	maze_height = maze_height*2+1
 	ghost_move = -1
 	move = 0
 	ghosts_pos = position_ghost(maze_array,0)
 	ghost_move += 1
 	player_location = place_player(maze_array)
 	player_facing = randint(0,4)
-
-	player_location = 11
-	player_facing = 3
 
 	playing = True
 
@@ -72,10 +71,10 @@ def main_game():
 		elif ((action.lower()=="m") or (action.lower()=="n")):
 			player_facing = change_facing(action.lower(),player_facing)
 		elif (action.lower() == "x"):
-			if ((player_facing == 0) and (maze_array[player_location-10] != 0)):
-				player_location -=10
-			elif ((player_facing == 2) and (maze_array[player_location+10] !=0)):
-				player_location += 10
+			if ((player_facing == 0) and (maze_array[player_location-maze_width] != 0)):
+				player_location -= maze_width
+			elif ((player_facing == 2) and (maze_array[player_location+maze_width] !=0)):
+				player_location += maze_width
 			elif ((player_facing == 1) and (maze_array[player_location+1] !=0)):
 				player_location += 1
 			elif ((player_facing == 3) and (maze_array[player_location-1] !=0)):
@@ -159,13 +158,13 @@ def display_position(facing,maze_array,player_location,width):
 		print(view)
 
 #Builds the maze
-def build_maze(maze_array,gen_maze,width):
+def build_maze(maze_array,gen_maze,width,height):
 
 	maze = ""
 
 
 	if(gen_maze):
-		maze = generate_maze(int((width-1)/2))
+		maze = generate_maze(width,height)
 	else:
 		maze = "{}0000000000".format(maze)
 		maze = "{}0111100110".format(maze)

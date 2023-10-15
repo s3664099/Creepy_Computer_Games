@@ -3,10 +3,10 @@ import numpy as np
 import random
 from queue import Queue
 
-def create_maze(dim):
+def create_maze(width,height):
 
     # Create a grid filled with walls
-    maze = np.zeros((dim*2+1, dim*2+1))
+    maze = np.zeros((width*2+1, height*2+1))
 
     # Define the starting point
     x, y = (0, 0)
@@ -23,7 +23,7 @@ def create_maze(dim):
 
         for dx, dy in directions:
             nx, ny = x + dx, y + dy
-            if nx >= 0 and ny >= 0 and nx < dim and ny < dim and maze[2*nx+1, 2*ny+1] == 0:
+            if nx >= 0 and ny >= 0 and nx < width and ny < height and maze[2*nx+1, 2*ny+1] == 0:
                 maze[2*nx+1, 2*ny+1] = 1
                 maze[2*x+1+dx, 2*y+1+dy] = 1
                 stack.append((nx, ny))
@@ -35,10 +35,10 @@ def create_maze(dim):
     maze[-2, -1] = 9
     return maze
 
-def generate_maze(dim):
+def generate_maze(width,height):
 
-    gen_maze = create_maze(dim)
-    print(gen_maze)
+    gen_maze = create_maze(width,height)
+
     maze=""
 
     for x in gen_maze:
