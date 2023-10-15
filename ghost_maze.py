@@ -32,9 +32,12 @@ instructions = "{}M: Turns you right (through 90 degrees)\n".format(instructions
 
 def main_game():
 
-	#Set up the game
+	#Set the size of the maze
+	#The maze is 2x the size of the values set here
 	maze_width = 5
 	maze_height = 3
+
+	#Sets up the main values in the game
 	maze_array = build_maze([],True,maze_height,maze_width)
 	maze_width = maze_width*2+1
 	maze_height = maze_height*2+1
@@ -161,7 +164,6 @@ def display_position(facing,maze_array,player_location,width):
 def build_maze(maze_array,gen_maze,width,height):
 
 	maze = ""
-
 
 	if(gen_maze):
 		maze = generate_maze(width,height)
