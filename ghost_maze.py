@@ -4,6 +4,7 @@ import loader
 import sys
 import util
 from random import randint
+from maze_generator import generate_maze
 
 """
 Title: Ghost Maze
@@ -32,9 +33,9 @@ instructions = "{}M: Turns you right (through 90 degrees)\n".format(instructions
 def main_game():
 
 	#Set up the game
-	maze_width = 10
+	maze_width = 11	#For a generated maze, the width needs to be an odd number
 	maze_height = 7
-	maze_array = build_maze([])
+	maze_array = build_maze([],True,maze_width)
 	ghost_move = -1
 	move = 0
 	ghosts_pos = position_ghost(maze_array,0)
@@ -158,16 +159,21 @@ def display_position(facing,maze_array,player_location,width):
 		print(view)
 
 #Builds the maze
-def build_maze(maze_array):
+def build_maze(maze_array,gen_maze,width):
 
 	maze = ""
-	maze = "{}0000000000".format(maze)
-	maze = "{}0111100110".format(maze)
-	maze = "{}0010011100".format(maze)
-	maze = "{}0011010110".format(maze)
-	maze = "{}0110100100".format(maze)
-	maze = "{}0011111100".format(maze)
-	maze = "{}0000009000".format(maze)
+
+
+	if(gen_maze):
+		maze = generate_maze(int((width-1)/2))
+	else:
+		maze = "{}0000000000".format(maze)
+		maze = "{}0111100110".format(maze)
+		maze = "{}0010011100".format(maze)
+		maze = "{}0011010110".format(maze)
+		maze = "{}0110100100".format(maze)
+		maze = "{}0011111100".format(maze)
+		maze = "{}0000009000".format(maze)
 
 	for x in maze:
 		maze_array.append(int(x))

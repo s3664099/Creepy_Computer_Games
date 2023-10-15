@@ -4,12 +4,13 @@ import random
 from queue import Queue
 
 def create_maze(dim):
+
     # Create a grid filled with walls
-    maze = np.ones((dim*2+1, dim*2+1))
+    maze = np.zeros((dim*2+1, dim*2+1))
 
     # Define the starting point
     x, y = (0, 0)
-    maze[2*x+1, 2*y+1] = 0
+    maze[2*x+1, 2*y+1] = 1
 
     # Initialize the stack with the starting point
     stack = [(x, y)]
@@ -22,19 +23,29 @@ def create_maze(dim):
 
         for dx, dy in directions:
             nx, ny = x + dx, y + dy
-            if nx >= 0 and ny >= 0 and nx < dim and ny < dim and maze[2*nx+1, 2*ny+1] == 1:
-                maze[2*nx+1, 2*ny+1] = 0
-                maze[2*x+1+dx, 2*y+1+dy] = 0
+            if nx >= 0 and ny >= 0 and nx < dim and ny < dim and maze[2*nx+1, 2*ny+1] == 0:
+                maze[2*nx+1, 2*ny+1] = 1
+                maze[2*x+1+dx, 2*y+1+dy] = 1
                 stack.append((nx, ny))
                 break
         else:
             stack.pop()
             
-    # Create an entrance and an exit
-    maze[1, 0] = 0
-    maze[-2, -1] = 0
-
+    # Create an exit
+    maze[-2, -1] = 9
     return maze
+
+def generate_maze(dim):
+
+    gen_maze = create_maze(dim)
+    print(gen_maze)
+    maze=""
+
+    for x in gen_maze:
+        for y in x:
+            maze = "{}{}".format(maze,int(y))
+
+    return maze   
 
 def draw_maze(maze, path=None):
     fig, ax = plt.subplots(figsize=(10,10))
@@ -83,7 +94,12 @@ def find_path(maze):
 
 if __name__ == "__main__":
     #dim = int(input("Enter the dimension of the maze: "))
-    maze = create_maze(5)
+    
     #path = find_path(maze)
     #draw_maze(maze)
+    maze = ""
+    print(gen_maze)
+    for x in gen_maze:
+        for y in x:
+            maze = "{}{}".format(maze,int(y))
     print(maze)
