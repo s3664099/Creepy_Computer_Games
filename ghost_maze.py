@@ -9,8 +9,8 @@ from random import randint
 Title: Ghost Maze
 Author: Colin Reynolds
 Translator: David Sarkies
-Version: 0
-Date: 29 September 2023
+Version: 0.2
+Date: 14 October 2023
 Source: https://ia601902.us.archive.org/3/items/Creepy_Computer_Games_1983_Usborne_Publishing/Creepy_Computer_Games_1983_Usborne_Publishing.pdf
 This game can be found on page 14 of Creepy Computer Games, and it a python3 translation.
 
@@ -42,12 +42,12 @@ def main_game():
 	player_location = place_player(maze_array)
 	player_facing = randint(0,4)
 
+	player_location = 11
+	player_facing = 3
+
 	playing = True
 
 	while (playing):
-
-		print(player_location)
-		print(ghosts_pos)
 
 		#Checks if player is next to a ghost
 		if(check_position(ghosts_pos,player_location,maze_width)):
@@ -111,31 +111,33 @@ def display_position(facing,maze_array,player_location,width):
 
 	display_grid = []
 
-	for x in range(3):
+	for spot in reversed(range(3)):
 
 		grid_row = []
-		spot = x-1
 
-		if (facing == 0):
-			grid_row.append(player_location-width*spot+1)
-			grid_row.append(player_location-width*spot)
+		if (facing == 0):		
 			grid_row.append(player_location-width*spot-1)
-		elif (facing == 1):
-			grid_row.append(player_location+width+spot)
-			grid_row.append(player_location+spot)
+			grid_row.append(player_location-width*spot)
+			grid_row.append(player_location-width*spot+1)
+		elif (facing == 1):	
 			grid_row.append(player_location-width+spot)
+			grid_row.append(player_location+spot)
+			grid_row.append(player_location+width+spot)
 		elif (facing == 2):
-			grid_row.append(player_location+width*spot-1)
-			grid_row.append(player_location+width*spot)
 			grid_row.append(player_location+width*spot+1)
+			grid_row.append(player_location+width*spot)
+			grid_row.append(player_location+width*spot-1)
 		else:
-			grid_row.append(player_location-spot-width)
-			grid_row.append(player_location-spot)
 			grid_row.append(player_location-spot+width)
+			grid_row.append(player_location-spot)
+			grid_row.append(player_location-spot-width)
 
 		display = []	
 
 		for y in range(3):
+
+			if (grid_row[y]>(len(maze_array)-1)):
+				grid_row[y] = 0
 
 			if maze_array[grid_row[y]] == 0:
 				display.append("#")
@@ -147,7 +149,7 @@ def display_position(facing,maze_array,player_location,width):
 				display.append("X")
 
 		display_grid.append(display)
-	display_grid[1][1] = "Y"
+	display_grid[2][1] = "Y"
 
 	for x in range(3):
 		view = ""
@@ -195,7 +197,7 @@ def place_player(maze_array):
 
 	#Checks that the position is not a wall
 	while (maze_array[player_location] == 0):
-		player_location = randint(0,len(maze_array))
+		player_location = randint(0,len(maze_array)-1)
 
 	return player_location
 
@@ -208,7 +210,7 @@ def position_ghost(maze_array,ghosts_pos):
 
 	#Checks that the ghost is not in a wall
 	while (maze_array[ghosts_pos] == 0):
-		ghosts_pos = randint(0,len(maze_array-1))
+		ghosts_pos = randint(0,len(maze_array)-1)
 
 	maze_array[ghosts_pos] = 2
 
@@ -222,9 +224,10 @@ def check_position(ghost,player,width):
 	if ((player+width == ghost) or (player-width == ghost)
 		or (player+1 == ghost) or (player-1 == ghost)):
 		position = True
+		print("The ghost has zapped you to another part of the maze")
 
 	return position
 
 #Passes the current file as a module to the loader
 if __name__ == '__main__':
-	loader.start_game("Starship Takeoff",sys.modules[__name__])
+	loader.start_game("Ghost Maze",sys.modules[__name__])
