@@ -6,7 +6,7 @@ def main():
     pygame.init()
 
     # Set up display dimensions
-    width, height = 850, 600
+    width, height = 800, 600
     screen = pygame.display.set_mode((width, height))
 
     # Set up the colors
@@ -19,20 +19,18 @@ def main():
 
 
         #First Squares
-        pygame.draw.line(screen,white,(50,400),(300,400))
-        pygame.draw.line(screen,white,(300,400),(550,400))
-        pygame.draw.line(screen,white,(550,400),(800,400))
-        pygame.draw.line(screen,white,(50,400),(50,150))
-        pygame.draw.line(screen,white,(300,400),(300,150))
-        pygame.draw.line(screen,white,(550,400),(550,150))
-        pygame.draw.line(screen,white,(800,400),(800,150))
-        pygame.draw.line(screen,white,(50,150),(300,150))
-        pygame.draw.line(screen,white,(300,150),(550,150))
-        pygame.draw.line(screen,white,(550,150),(800,150))
-
+        
         #Second Squares
-        pygame.draw.line(screen,white,(350,350),(500,350))
+        #pygame.draw.line(screen,white,(325,375),(525,375))
 
+        #Third Squares
+        #pygame.draw.line(screen,white,(350,350),(500,350))
+
+        #Fourth Squares
+        pygame.draw.line(screen,white,(400,300),(450,300))
+        pygame.draw.line(screen,white,(400,300),(400,250))
+        pygame.draw.line(screen,white,(400,250),(450,250))
+        pygame.draw.line(screen,white,(450,250),(450,300))
 
         pygame.display.flip()
 
