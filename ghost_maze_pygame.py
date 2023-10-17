@@ -19,10 +19,12 @@ def main(display_grid):
 
         if (display_grid[0][0] == "#"):
             pygame.draw.rect(screen, white, (375,300,25,25))
+            pygame.draw.polygon(screen,white,((400,300),(405,313),(400,325)))
         if (display_grid[0][1] == "#"):
             pygame.draw.rect(screen, white, (400,300,25,25))
         if (display_grid[0][2] == "#"):
             pygame.draw.rect(screen, white, (425,300,25,25))
+            pygame.draw.polygon(screen, white, ((425,300),(420,313),(425,325)))
 
         pygame.display.flip()
 
