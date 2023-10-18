@@ -18,13 +18,21 @@ def main(display_grid):
     while running:
 
         if (display_grid[0][0] == "#"):
-            pygame.draw.rect(screen, white, (375,300,25,25))
-            pygame.draw.polygon(screen,white,((400,300),(405,313),(400,325)))
+            pygame.draw.rect(screen, white, (375,300,20,20))
+            pygame.draw.polygon(screen,white,((395,300),(405,310),(395,320)))
         if (display_grid[0][1] == "#"):
-            pygame.draw.rect(screen, white, (400,300,25,25))
+            pygame.draw.rect(screen, white, (395,300,20,20))
         if (display_grid[0][2] == "#"):
-            pygame.draw.rect(screen, white, (425,300,25,25))
-            pygame.draw.polygon(screen, white, ((425,300),(420,313),(425,325)))
+            pygame.draw.rect(screen, white, (415,300,20,20))
+            pygame.draw.polygon(screen, white, ((415,300),(405,310),(415,320)))
+        if (display_grid[1][0] == "#"):
+            pygame.draw.rect(screen,white, (345,290,40,40))
+            pygame.draw.polygon(screen,white,((385,290),(395,300),(395,320),(385,330)))
+        if (display_grid[1][1] == "#"):
+            pygame.draw.rect(screen,white, (385,290,40,40))
+        if (display_grid[1][2] == "#"):
+            pygame.draw.rect(screen,white, (425,290,40,40))
+            pygame.draw.polygon(screen,white, ((425,290),(415,300),(415,320),(425,330))) 
 
         pygame.display.flip()
 
@@ -35,7 +43,7 @@ def draw_square(screen,color,x,y,z):
     pygame.draw.line(screen,color,(x,y),(y,y))
     pygame.draw.line(screen,color,(y,y),(y,z))
 
-display_grid = [['#','','#'],['#','#','#'],['#','#','#']]
+display_grid = [['#','','#'],['#','','#'],['#','#','#']]
 
 main(display_grid)
 
