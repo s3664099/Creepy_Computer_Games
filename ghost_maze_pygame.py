@@ -17,6 +17,51 @@ def main(display_grid):
     running = True
     while running:
 
+        x_pos_start = 375
+        y_pos_start = 300
+        size = 20
+        size_start = 0
+
+        for x in display_grid:
+
+            x_position = x_pos_start
+            y_position = y_pos_start
+            pos = 0
+
+            for y in x:
+
+                polygon_size = size/2
+
+                if y == "#":
+                    pygame.draw.rect(screen,white,(x_position,y_position,size,size))
+
+                    if pos == 0:
+
+                        if size_start == 0:
+                            pygame.draw.polygon(screen,white, ((x_position+size,y_position),(x_position+size+polygon_size,y_position+polygon_size),(x_position+size,y_position+size)))
+                        else:
+                            pygame.draw.polygon(screen,white, ((x_position+size,y_position),(x_position+size+polygon_size,y_position+(polygon_size/2)),(x_position+size+polygon_size,y_position+(polygon_size)),(x_position+size,y_position+size)))
+
+                    if pos == 2:
+
+                        if size_start == 0:
+                            pygame.draw.polygon(screen,white, ((x_position,y_position),(x_position-polygon_size,y_position+polygon_size),(x_position,y_position+size)))
+                        else:
+                            pygame.draw.polygon(screen,white, ((x_position,y_position),(x_position-polygon_size,y_position+(polygon_size/2)),(x_position-polygon_size,y_position+(polygon_size)),(x_position,y_position+size)))
+
+                pos+=1
+
+                x_position += size
+
+            x_pos_start = x_pos_start - (size * 2) + (size/2)
+            y_pos_start = y_pos_start - (size/2)
+            size *=2
+            size_start +=1
+
+        pygame.display.flip()
+
+
+"""
         if (display_grid[0][0] == "#"):
             pygame.draw.rect(screen, white, (375,300,20,20))
             pygame.draw.polygon(screen,white,((395,300),(405,310),(395,320)))
@@ -41,8 +86,7 @@ def main(display_grid):
         if (display_grid[2][2] == "#"):
             pygame.draw.rect(screen,white, (445,270,80,80))
             pygame.draw.polygon(screen,white, ((445,270),(425,290),(425,330),(445,350)))
-
-        pygame.display.flip()
+"""
 
 def draw_square(screen,color,x,y,z):
 
