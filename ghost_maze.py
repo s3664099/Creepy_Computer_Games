@@ -3,6 +3,7 @@
 import loader
 import sys
 import util
+import ghost_maze_pygame as graphics
 from random import randint
 from maze_generator import generate_maze
 
@@ -10,11 +11,17 @@ from maze_generator import generate_maze
 Title: Ghost Maze
 Author: Colin Reynolds
 Translator: David Sarkies
-Version: 0.3
+Version: 0.4
 Date: 15 October 2023
+Update: 23 October 2023
 Source: https://ia601902.us.archive.org/3/items/Creepy_Computer_Games_1983_Usborne_Publishing/Creepy_Computer_Games_1983_Usborne_Publishing.pdf
 This game can be found on page 14 of Creepy Computer Games, and it a python3 translation.
 
+
+TODO:
+Add Movement Functions for graphics
+Add different coloured floor
+Add ghost
 """
 
 instructions = "It's a creepy sort of place. The identical dark corridors don't seem to go\n"
@@ -50,6 +57,8 @@ def main_game():
 
 	playing = True
 
+	screen = graphics.create_screen()
+
 	while (playing):
 
 		#Checks if player is next to a ghost
@@ -65,7 +74,7 @@ def main_game():
 			move = 0
 			ghost_move += 1		
 
-		display_position(player_facing,maze_array,player_location,maze_width)
+		display_position(player_facing,maze_array,player_location,maze_width,screen)
 
 		action = get_input()
 
@@ -110,7 +119,7 @@ def change_facing(action, player_facing):
 
 	return player_facing
 
-def display_position(facing,maze_array,player_location,width):
+def display_position(facing,maze_array,player_location,width,screen):
 
 	display_grid = []
 
@@ -152,13 +161,14 @@ def display_position(facing,maze_array,player_location,width):
 				display.append("X")
 
 		display_grid.append(display)
-	display_grid[2][1] = "Y"
+	
+	graphics.display(display_grid,screen)
 
-	for x in range(3):
-		view = ""
-		for y in range(3):
-			view = "{}{}".format(view,display_grid[x][y])
-		print(view)
+	#for x in range(3):
+	#	view = ""
+	#	for y in range(3):
+	#		view = "{}{}".format(view,display_grid[x][y])
+	#	print(view)
 
 #Builds the maze
 def build_maze(maze_array,gen_maze,width,height):

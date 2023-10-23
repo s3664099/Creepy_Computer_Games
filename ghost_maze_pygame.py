@@ -1,18 +1,29 @@
+"""
+Title: Ghost Maze Pygame Function
+Version: 0.8
+Date: 23 October 2023
+"""
+
 import pygame
 from pygame.locals import *
 
-def main(display_grid):
-    # Initialize Pygame
-    pygame.init()
+# Initialize Pygame
+pygame.init()
+
+
+# Set up the colors
+white = (255, 255, 255)
+red = (255,0,0)
+
+def create_screen():
 
     # Set up display dimensions
     width, height = 800, 600
     screen = pygame.display.set_mode((width, height))
 
-    # Set up the colors
-    white = (255, 255, 255)
-    red = (255,0,0)
+    return screen
 
+def display(display_grid,screen):
 
     # Main loop
     running = True
@@ -36,7 +47,7 @@ def main(display_grid):
                 #Checks whether there is an exit, and if so changes the colour to red
                 colour = white
 
-                if y =="9":
+                if y =="X":
                     colour = red
                     y = "#" 
 
@@ -74,9 +85,9 @@ def main(display_grid):
 
         pygame.display.flip()
 
-display_grid = [['#','','#'],['9','','#'],['#','','#']]
+#display_grid = [['#','','#'],['9','','#'],['#','','#']]
 
-main(display_grid)
+#main(display_grid)
 
 # Quit Pygame
 pygame.quit()
