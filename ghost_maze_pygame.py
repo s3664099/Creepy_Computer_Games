@@ -56,23 +56,25 @@ def display(display_grid,screen):
                 #Checks whether there is a wall
                 if y == "#":
 
-                    #Draws the wall
-                    pygame.draw.rect(screen,colour,(x_position,y_position,size,size))
-
                     #Checks which position the wall is on, and then draws the appropriate polygon
                     if pos == 0:
 
                         if size_start == 0:
-                            pygame.draw.polygon(screen,colour, ((x_position+size,y_position),(x_position+size+polygon_size,y_position+polygon_size),(x_position+size,y_position+size)))
+                            pygame.draw.polygon(screen,colour, ((x_position,y_position),(x_position+size,y_position),(x_position+size+polygon_size,y_position+polygon_size),(x_position+size,y_position+size),(x_position,y_position+size)))
                         else:
-                            pygame.draw.polygon(screen,colour, ((x_position+size,y_position),(x_position+size+(polygon_size/2),y_position+(polygon_size/2)),(x_position+size+(polygon_size/2),y_position+(size/2+polygon_size/2)),(x_position+size,y_position+size)))
+                            pygame.draw.polygon(screen,colour, ((x_position,y_position),(x_position+size,y_position),(x_position+size+(polygon_size/2),y_position+(polygon_size/2)),
+                                                (x_position+size+(polygon_size/2),y_position+(size/2+polygon_size/2)),(x_position+size,y_position+size),(x_position,y_position+size)))
+
+                    if pos == 1:
+                        pygame.draw.rect(screen,colour,(x_position,y_position,size,size)) 
 
                     if pos == 2:
 
                         if size_start == 0:
-                            pygame.draw.polygon(screen,colour, ((x_position,y_position),(x_position-polygon_size,y_position+polygon_size),(x_position,y_position+size)))
+                            pygame.draw.polygon(screen,colour, ((x_position,y_position),(x_position-polygon_size,y_position+polygon_size),(x_position,y_position+size),(x_position+size,y_position+size),(x_position+size,y_position)))
                         else:
-                            pygame.draw.polygon(screen,colour, ((x_position,y_position),(x_position-(polygon_size/2),y_position+(polygon_size/2)),(x_position-(polygon_size/2),y_position+(size/2+polygon_size/2)),(x_position,y_position+size)))
+                            pygame.draw.polygon(screen,colour, ((x_position,y_position),(x_position-(polygon_size/2),y_position+(polygon_size/2)),(x_position-(polygon_size/2),y_position+(size/2+polygon_size/2)),(x_position,y_position+size),
+                                                (x_position+size,y_position+size),(x_position+size,y_position)))
 
                 pos+=1
 
@@ -85,9 +87,10 @@ def display(display_grid,screen):
 
         pygame.display.flip()
 
-#display_grid = [['#','','#'],['9','','#'],['#','','#']]
+display_grid = [['','',''],['#','','#'],['','','']]
 
-#main(display_grid)
+screen = create_screen()
+display(display_grid, screen)
 
 # Quit Pygame
 pygame.quit()
