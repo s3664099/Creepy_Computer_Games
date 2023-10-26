@@ -14,6 +14,7 @@ pygame.init()
 # Set up the colors
 white = (255, 255, 255)
 red = (255,0,0)
+yellow = (255,255,0)
 
 def create_screen():
 
@@ -29,9 +30,9 @@ def display(display_grid,screen):
     running = True
     while running:
 
-        x_pos_start = 375
+        x_pos_start = 295
         y_pos_start = 300
-        size = 20
+        size = 80
         size_start = 0
 
         #Moves through the grid
@@ -87,7 +88,7 @@ def display(display_grid,screen):
 
         pygame.display.flip()
 
-display_grid = [['','',''],['#','','#'],['','','']]
+display_grid = [['#','',''],['','','#'],['#','','#']]
 
 screen = create_screen()
 display(display_grid, screen)
