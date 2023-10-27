@@ -15,6 +15,7 @@ pygame.init()
 white = (255, 255, 255)
 red = (255,0,0)
 yellow = (255,255,0)
+black = (0,0,0)
 
 def create_screen():
 
@@ -25,6 +26,8 @@ def create_screen():
     return screen
 
 def display(display_grid,screen):
+
+    screen.fill(black)
 
     # Main loop
     x_pos_start = 295
