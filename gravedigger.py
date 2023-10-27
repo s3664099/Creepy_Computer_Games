@@ -6,6 +6,7 @@ import util
 import time
 import gravedigger_setup as setup
 import gravedigger_pygame as graphics
+import message
 from random import randint
 
 
@@ -94,7 +95,7 @@ def main_game():
 			finished = True
 
 	if graphic_display:
-		graphics.display_message(display_result(result,score,holes,True),display)
+		message.display_message(display_result(result,score,holes,True),display)
 	else:
 		print(display_result(result,score,holes,False))
 
