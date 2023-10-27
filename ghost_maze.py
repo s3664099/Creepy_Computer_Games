@@ -161,14 +161,11 @@ def display_position(facing,maze_array,player_location,width,screen):
 				display.append("X")
 
 		display_grid.append(display)
-	
-	graphics.display(display_grid,screen)
 
-	#for x in range(3):
-	#	view = ""
-	#	for y in range(3):
-	#		view = "{}{}".format(view,display_grid[x][y])
-	#	print(view)
+	for x in display_grid:
+		print(x)
+
+	graphics.display(display_grid,screen)
 
 #Builds the maze
 def build_maze(maze_array,gen_maze,width,height):
@@ -194,15 +191,12 @@ def build_maze(maze_array,gen_maze,width,height):
 #Gets player input
 def get_input():
 
-	correct = False
 	action = ""
 
 	#Checks if valid action
-	while(not correct):
+	while(action == ""):
 
-		action = input()
-		if ((action.lower() == "m") or (action.lower() == "n") or (action.lower() == "x") or (action.lower() == "q")):
-			correct = True
+		action = graphics.get_keypress()
 
 	return action
 
