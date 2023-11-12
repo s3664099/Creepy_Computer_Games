@@ -51,9 +51,15 @@ def display(display_grid,screen):
             #Checks whether there is an exit, and if so changes the colour to red
             colour = white
 
+            #Exit
             if y =="X":
                 colour = red
-                y = "#" 
+                y = "#"
+
+            #Ghost
+            if y=="G":
+                colour = yellow
+                y="#"
 
             polygon_size = size/2
 
@@ -106,10 +112,6 @@ def get_keypress():
                 key = "n"
             elif event.key == pygame.K_q:
                 key = "q"
-
-    if key != "":
-        print(key)
-        print(events)
 
     return key
 

@@ -162,9 +162,6 @@ def display_position(facing,maze_array,player_location,width,screen):
 
 		display_grid.append(display)
 
-	for x in display_grid:
-		print(x)
-
 	graphics.display(display_grid,screen)
 
 #Builds the maze
