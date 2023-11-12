@@ -35,6 +35,8 @@ def display(display_grid,screen):
     size = 80
     size_start = 0
 
+    #Add drawing for floors - light grey
+
     #Moves through the grid
     for x in display_grid:
 
@@ -42,11 +44,18 @@ def display(display_grid,screen):
         y_position = y_pos_start
         pos = 0
 
-        display = ""
+        for z in range(3):
 
-        for y in x:
+            print(x)
 
-            display += y
+            #Sets the drawing order - L/R/C
+            if (z == 1):
+                pos = 2
+            elif (z == 2):
+                pos = 1
+
+            y = x[pos]
+            print("{} {}".format(y,pos))
 
             #Checks whether there is an exit, and if so changes the colour to red
             colour = white
@@ -85,8 +94,6 @@ def display(display_grid,screen):
                     else:
                         pygame.draw.polygon(screen,colour, ((x_position,y_position),(x_position-(polygon_size/2),y_position+(polygon_size/2)),(x_position-(polygon_size/2),y_position+(size/2+polygon_size/2)),(x_position,y_position+size),
                                             (x_position+size,y_position+size),(x_position+size,y_position)))
-
-            pos+=1
 
             x_position += size
 
