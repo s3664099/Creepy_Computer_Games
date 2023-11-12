@@ -19,9 +19,9 @@ This game can be found on page 14 of Creepy Computer Games, and it a python3 tra
 
 
 TODO:
-Add Movement Functions for graphics
+Remove side walls for size_start = 2
 Add different coloured floor
-Add ghost
+Have Notes appear on pygame window and remove from CLI
 """
 
 instructions = "It's a creepy sort of place. The identical dark corridors don't seem to go\n"
@@ -45,9 +45,16 @@ def main_game():
 	maze_height = 3
 
 	#Sets up the main values in the game
-	maze_array = build_maze([],True,maze_height,maze_width)
-	maze_width = maze_width*2+1
-	maze_height = maze_height*2+1
+	random_builder = False
+	maze_array = build_maze([],random_builder,maze_height,maze_width)
+
+	if (random_builder):
+		maze_width = maze_width*2+1
+		maze_height = maze_height*2+1
+	else:
+		maze_width = 10
+		maze_height = 10
+
 	ghost_move = -1
 	move = 0
 	ghosts_pos = position_ghost(maze_array,0)
@@ -55,11 +62,17 @@ def main_game():
 	player_location = place_player(maze_array)
 	player_facing = randint(0,4)
 
+	player_location = 11
+	player_facing = 0
+
 	playing = True
 
 	screen = graphics.create_screen()
 
 	while (playing):
+
+		print("Location {}".format(player_location))
+		print("Facing {}".format(player_facing))
 
 		#Checks if player is next to a ghost
 		if(check_position(ghosts_pos,player_location,maze_width)):

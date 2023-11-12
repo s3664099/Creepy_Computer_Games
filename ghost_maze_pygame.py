@@ -6,7 +6,7 @@ Date: 23 October 2023
 
 import pygame
 from pygame.locals import *
-
+import time
 # Initialize Pygame
 pygame.init()
 
@@ -46,8 +46,6 @@ def display(display_grid,screen):
 
         for z in range(3):
 
-            print(x)
-
             #Sets the drawing order - L/R/C
             if (z == 1):
                 pos = 2
@@ -55,7 +53,6 @@ def display(display_grid,screen):
                 pos = 1
 
             y = x[pos]
-            print("{} {}".format(y,pos))
 
             #Checks whether there is an exit, and if so changes the colour to red
             colour = white
@@ -95,7 +92,10 @@ def display(display_grid,screen):
                         pygame.draw.polygon(screen,colour, ((x_position,y_position),(x_position-(polygon_size/2),y_position+(polygon_size/2)),(x_position-(polygon_size/2),y_position+(size/2+polygon_size/2)),(x_position,y_position+size),
                                             (x_position+size,y_position+size),(x_position+size,y_position)))
 
-            x_position += size
+            if (z==0):
+                x_position += (size*2)
+            if (z==1):
+                x_position -= size
 
         x_pos_start = x_pos_start - (size * 2) + (size/2)
         y_pos_start = y_pos_start - (size/2)
@@ -114,9 +114,9 @@ def get_keypress():
             if event.key == pygame.K_UP or event.key == pygame.K_x:
                 key = "x"
             elif event.key == pygame.K_LEFT or event.key == pygame.K_m:
-                key = "m"
-            elif event.key == pygame.K_RIGHT or event.key == pygame.K_n:
                 key = "n"
+            elif event.key == pygame.K_RIGHT or event.key == pygame.K_n:
+                key = "m"
             elif event.key == pygame.K_q:
                 key = "q"
 
