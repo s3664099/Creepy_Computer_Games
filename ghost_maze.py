@@ -19,7 +19,6 @@ This game can be found on page 14 of Creepy Computer Games, and it a python3 tra
 
 
 TODO:
-Remove side walls for size_start = 2
 Add different coloured floor
 Have Notes appear on pygame window and remove from CLI
 """
@@ -70,9 +69,6 @@ def main_game():
 	screen = graphics.create_screen()
 
 	while (playing):
-
-		print("Location {}".format(player_location))
-		print("Facing {}".format(player_facing))
 
 		#Checks if player is next to a ghost
 		if(check_position(ghosts_pos,player_location,maze_width)):

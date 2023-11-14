@@ -16,6 +16,7 @@ white = (255, 255, 255)
 red = (255,0,0)
 yellow = (255,255,0)
 black = (0,0,0)
+brown = (56,50,32)
 
 def create_screen():
 
@@ -36,6 +37,8 @@ def display(display_grid,screen):
     size_start = 0
 
     #Add drawing for floors - light grey
+
+    pygame.draw.rect(screen,brown, pygame.Rect(295-80-40,340,80*6,80*2))
 
     #Moves through the grid
     for x in display_grid:
@@ -116,7 +119,7 @@ def display(display_grid,screen):
         size *=2
         size_start +=1
 
-        pygame.display.flip()
+    pygame.display.flip()
 
 def get_keypress():
 
