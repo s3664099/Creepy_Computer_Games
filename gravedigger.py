@@ -96,6 +96,7 @@ def main_game():
 
 	if graphic_display:
 		message.display_message(display_result(result,score,holes,True),display)
+		graphics.quit_game()
 	else:
 		print(display_result(result,score,holes,False))
 

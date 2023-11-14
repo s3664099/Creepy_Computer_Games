@@ -83,6 +83,9 @@ def get_keypress():
 
 	return key
 
+def quit_game():
+	pygame.quit()
+
 """
 Skeleton - https://www.flaticon.com/free-icons/skeleton Skeleton icons created by Freepik - Flaticon
 Gravestone - https://www.flaticon.com/free-icons/death Death icons created by Eucalyp - Flaticon

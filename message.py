@@ -8,7 +8,6 @@ def display_message(message,display):
 
 	message_display(message,display,30,"centre")
 	pygame.time.wait(1000)
-	pygame.quit()
 
 def message_display(text,display,size,textPosition):
 	display_width = 800

@@ -145,4 +145,5 @@ def get_keypress():
 #display(display_grid, screen)
 
 # Quit Pygame
-#pygame.quit()
+def quit_game():
+    pygame.quit()

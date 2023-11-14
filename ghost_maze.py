@@ -6,6 +6,7 @@ import util
 import ghost_maze_pygame as graphics
 from random import randint
 from maze_generator import generate_maze
+import message
 
 """
 Title: Ghost Maze
@@ -19,8 +20,9 @@ This game can be found on page 14 of Creepy Computer Games, and it a python3 tra
 
 
 TODO:
-Add different coloured floor
-Have Notes appear on pygame window and remove from CLI
+Add Notes to readme.md
+Add Seance to finish off Creepy Computer Games and remove folder
+Do Battleship.cpp, qwerkle, Connect 4, PIoT to clear clutter from folder
 """
 
 instructions = "It's a creepy sort of place. The identical dark corridors don't seem to go\n"
@@ -71,7 +73,7 @@ def main_game():
 	while (playing):
 
 		#Checks if player is next to a ghost
-		if(check_position(ghosts_pos,player_location,maze_width)):
+		if(check_position(ghosts_pos,player_location,maze_width,screen)):
 			player_location = place_player(maze_array)
 			ghosts_pos = position_ghost(maze_array,ghosts_pos)
 			move = 0
@@ -101,11 +103,12 @@ def main_game():
 			elif ((player_facing == 3) and (maze_array[player_location-1] !=0)):
 				player_location -= 1
 			else:
-				print("You cannot go there")
+				message.display_message("You cannot go there",screen)
 
 		if (maze_array[player_location] == 9):
-			print("You have escaped in {} moves".format(ghost_move*5+move))
+			message.display_message("You have escaped in {} moves".format(ghost_move*5+move),screen)
 			playing = False
+			graphics.quit_game()
 
 		move += 1
 
@@ -234,14 +237,14 @@ def position_ghost(maze_array,ghosts_pos):
 	return ghosts_pos
 
 #Checks if the player is next to the ghost
-def check_position(ghost,player,width):
+def check_position(ghost,player,width,display):
 
 	position = False
 
 	if ((player+width == ghost) or (player-width == ghost)
 		or (player+1 == ghost) or (player-1 == ghost)):
 		position = True
-		print("The ghost has zapped you to another part of the maze")
+		message.display_message("The ghost has zapped you to another part of the maze",display)
 
 	return position
 
