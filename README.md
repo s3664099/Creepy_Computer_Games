@@ -74,6 +74,17 @@ escape. The catch is that you can only control the first and third door by setti
 The second door will move randomly every twenty-five turns. You also have a time limit, namely steps that count
 down every turn.
 
+**Ghost Maze**
+So, this is a maze that you have to escape from. The thing with this one is that the original game, using
+character graphics, was designed so that you would only see what the character could see. As such, while
+it opened itself to graphics, it was not the same as the gravedigger, so I decided to do it as a 3D maze - the
+only way I could see the graphical aspect working.
+Yeah, it was pretty tricky, however I decided not to go full on since I decided to just make the ghost blocks 
+yellow and the exit blocks red. Oh, I also added a random maze generator, though I got ChatGPT to do it.
+
+Oh, I should mention that you can either use a random maze, or the set maze, by setting random_builder to
+either true or false.
+
 ## Updates
 **22 July 2023**
 Created the initial folder to hold the contents on the game.
@@ -90,3 +101,8 @@ Added Mad House game
 
 **1 October 2023**
 Added Ghost Maze Game. Completed basic code. Testing for errors and preparing for graphics.
+
+**16 November 2023**
+Completed Ghost Maze. Basically added a graphic interface that is a 3D maze game. The exit square is red
+and the ghost square is yellow. I decided that I did not want to do anything more complicated considering
+creating a 3D maze game was something tricky in itself.

@@ -46,7 +46,7 @@ def main_game():
 	maze_height = 3
 
 	#Sets up the main values in the game
-	random_builder = False
+	random_builder = True
 	maze_array = build_maze([],random_builder,maze_height,maze_width)
 
 	if (random_builder):
@@ -62,9 +62,6 @@ def main_game():
 	ghost_move += 1
 	player_location = place_player(maze_array)
 	player_facing = randint(0,4)
-
-	player_location = 11
-	player_facing = 0
 
 	playing = True
 
