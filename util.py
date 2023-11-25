@@ -258,3 +258,12 @@ def inkey(time_delay):
 			response = str(event.key)[1].upper()
 
 	return response
+
+def tab(times):
+
+	spaces = "    "
+
+	for x in range(8):
+		spaces = "{}    ".format(spaces)
+
+return spaces

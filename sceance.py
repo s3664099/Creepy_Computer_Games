@@ -22,6 +22,18 @@ instructions = "{}you make mistakes they will be angry - very angry ...\n".forma
 instructions = "{}Watch for starts on your screen - they show the letters in the Spirit's\n".format(instructions)
 instructions = "{}messages.".format(instructions)
 
+def title():
+	spaces = util.tab(8)
+	util.clear_screen()
+	print("{}Sceance".format(spaces))
+
+def main_game():
+	s=0
+	g=0
+	cs=64
+	title()
+
+
 #Passes the current file as a module to the loader
 if __name__ == '__main__':
 	loader.start_game("Starship Takeoff",sys.modules[__name__])
