@@ -28,21 +28,28 @@ def title():
 	spaces = util.tab(8,4)
 	util.clear_screen()
 	print("{}Sceance".format(spaces))
+	position = get_position(7,5)
 
 	for i in range(8):
-		x=7+i
-		y=2
+
 		letter=characters[i]
-		display_characters(letter,x,y)
+		position = display_characters(letter,position)
 
-def display_characters(letter,x,y):
+	print(position)
 
-	display = util.tab(x,2)
-	
+def get_position(x,y):
+
+	position = util.tab(x,2)
 	for i in range(y):
-		display = "\n{}".format(display)
+		position = "\n{}".format(position)
 
-	print("{}{}".format(display,letter))
+	return position	
+
+def display_characters(letter,position):
+
+	display = "{}{}".format(position,letter)
+	
+	return display
 
 def main_game():
 	s=0
