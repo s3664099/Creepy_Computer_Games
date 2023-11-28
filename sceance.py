@@ -22,7 +22,7 @@ instructions = "{}you make mistakes they will be angry - very angry ...\n".forma
 instructions = "{}Watch for starts on your screen - they show the letters in the Spirit's\n".format(instructions)
 instructions = "{}messages.".format(instructions)
 
-characters = ["a","b","c","d","e","f","g","h"]
+characters = ["a","b","c","d","e","f","g","h","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
 
 def title():
 	spaces = util.tab(8,4)
@@ -36,6 +36,15 @@ def title():
 		position = display_characters(letter,position)
 
 	print(position)
+
+	number = randint(4,7)
+	letters = ""
+
+	for i in range(number):
+		star = "*"
+		rand_letter = randint(0,26)
+		letter = characters[rand_letter]
+		letters = "{}{}".format(letters,letter)
 
 def get_position(x,y):
 
