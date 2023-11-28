@@ -22,10 +22,27 @@ instructions = "{}you make mistakes they will be angry - very angry ...\n".forma
 instructions = "{}Watch for starts on your screen - they show the letters in the Spirit's\n".format(instructions)
 instructions = "{}messages.".format(instructions)
 
+characters = ["a","b","c","d","e","f","g","h"]
+
 def title():
-	spaces = util.tab(8)
+	spaces = util.tab(8,4)
 	util.clear_screen()
 	print("{}Sceance".format(spaces))
+
+	for i in range(8):
+		x=7+i
+		y=2
+		letter=characters[i]
+		display_characters(letter,x,y)
+
+def display_characters(letter,x,y):
+
+	display = util.tab(x,2)
+	
+	for i in range(y):
+		display = "\n{}".format(display)
+
+	print("{}{}".format(display,letter))
 
 def main_game():
 	s=0
@@ -36,4 +53,4 @@ def main_game():
 
 #Passes the current file as a module to the loader
 if __name__ == '__main__':
-	loader.start_game("Starship Takeoff",sys.modules[__name__])
+	loader.start_game("Scence",sys.modules[__name__])

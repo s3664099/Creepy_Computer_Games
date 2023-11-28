@@ -259,11 +259,15 @@ def inkey(time_delay):
 
 	return response
 
-def tab(times):
+def tab(times,no_spaces):
 
-	spaces = "    "
+	spaces = ""
+	space = ""
 
-	for x in range(8):
-		spaces = "{}    ".format(spaces)
+	for x in range(no_spaces):
+		spaces = "{} ".format(spaces)
 
-return spaces
+	for x in range(times):
+		space = "{}{}".format(space,spaces)
+
+	return space
