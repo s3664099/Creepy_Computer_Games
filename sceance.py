@@ -28,14 +28,18 @@ def title():
 	spaces = util.tab(8,4)
 	util.clear_screen()
 	print("{}Sceance".format(spaces))
-	position = get_position(7,5)
+
+def set_position(x,y,letter):
+
+	return {"x": x, "y": y,"Letter": letter}
+
+def build_screen():
+
+	positions = []
 
 	for i in range(8):
 
-		letter=characters[i]
-		position = display_characters(letter,position)
-
-	print(position)
+		positions.append(set_position(5,6+i,characters[i]))
 
 	number = randint(4,7)
 	letters = ""
@@ -46,26 +50,33 @@ def title():
 		letter = characters[rand_letter]
 		letters = "{}{}".format(letters,letter)
 
-def get_position(x,y):
+		x=6
+		y=rand_letter+6
 
-	position = util.tab(x,2)
-	for i in range(y):
-		position = "\n{}".format(position)
+		if rand_letter<22:
+			y=10
+			x=28-rand_letter
+		elif rand_letter<14:
+			x=15
+			y=rand_letter-3
+		else:
+			y=64
+			x=rand_letter+6
+		positions.append(set_position(x,y,star))
 
-	return position	
-
-def display_characters(letter,position):
-
-	display = "{}{}".format(position,letter)
-	
-	return display
+	#Display Screen
+	#Pause
+	#Replace With Blank
+	#Get Quess
+	#If Guess = letters correct
+	#Else loose
 
 def main_game():
 	s=0
 	g=0
 	cs=64
 	title()
-
+	build_screen()
 
 #Passes the current file as a module to the loader
 if __name__ == '__main__':
