@@ -40,7 +40,14 @@ def build_screen():
 	for i in range(8):
 
 		positions.append(set_position(5,6+i,characters[i]))
+		positions.append(set_position(11,6+i,characters[19-i]))
 
+	for i in range(5):
+
+		positions.append(set_position(5+i,5,characters[24-i]))
+		positions.append(set_position(5+i,16,characters[8+i]))
+
+"""
 	number = randint(4,7)
 	letters = ""
 
@@ -63,7 +70,7 @@ def build_screen():
 			y=64
 			x=rand_letter+6
 		positions.append(set_position(x,y,star))
-
+"""
 	#Display Screen
 	#Pause
 	#Replace With Blank
