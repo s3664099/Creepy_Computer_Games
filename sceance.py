@@ -46,10 +46,76 @@ def build_positions_list():
 
 	for i in range(5):
 
-		positions.append(set_position(5+i,5,characters[24-i]))
+		positions.append(set_position(6+i,5,characters[24-i]))
 		positions.append(set_position(5+i,16,characters[8+i]))
 
+	return positions
+
+#Builds the main screen
 def build_screen(positions):
+
+	display = print_padding("")
+
+	#Builds the lines
+	for x in range(12):
+
+		#Checks to see if there are letters on the lines
+		row_found = False
+
+		for position in positions:
+
+			#There is a letter on the line
+			if position["x"] == x:
+
+				#Flags that a letter is on the line
+				row_found = True
+
+				#Builds padding
+				for y in range(10):
+					display += " "
+
+				for y in range(16):
+
+					#Checks if there are letters at the position
+					letter_present = False
+					for h_position in positions:
+
+						#Looks for letters
+						if h_position["y"] == y and h_position['x'] == x:
+
+							#Flags that there is a letter
+							display += h_position['Letter']
+							letter_present = True
+					
+					if letter_present == False:
+						display += " "
+
+				#Creates a line break and breaks			
+				display += "\n"
+				break
+
+		#Otherwise a blank line is printed
+		if row_found == False:
+			display = get_blank_line(display)+"\n"
+
+	print(display)
+
+#Prints padding at the top
+def print_padding(display):
+
+	for x in range(5):
+		display = get_blank_line(display)
+		display += "\n"
+
+	return display
+
+#The line is blank
+def get_blank_line(display):
+
+	for y in range(80):
+		display += " "
+	return display
+
 
 """
 	number = randint(4,7)
