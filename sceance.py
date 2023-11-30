@@ -29,11 +29,13 @@ def title():
 	util.clear_screen()
 	print("{}Sceance".format(spaces))
 
+#Constucts the dictionary to hold the position of a letter
 def set_position(x,y,letter):
 
 	return {"x": x, "y": y,"Letter": letter}
 
-def build_screen():
+#Constructs the list for the letters' positions
+def build_positions_list():
 
 	positions = []
 
@@ -46,6 +48,8 @@ def build_screen():
 
 		positions.append(set_position(5+i,5,characters[24-i]))
 		positions.append(set_position(5+i,16,characters[8+i]))
+
+def build_screen(positions):
 
 """
 	number = randint(4,7)
@@ -83,7 +87,8 @@ def main_game():
 	g=0
 	cs=64
 	title()
-	build_screen()
+	positions = build_positions_list()
+	build_screen(positions)
 
 #Passes the current file as a module to the loader
 if __name__ == '__main__':
