@@ -3,6 +3,7 @@
 import loader
 import sys
 import util
+import time
 from random import randint
 
 """
@@ -57,7 +58,7 @@ def build_screen(positions):
 	display = print_padding("")
 
 	#Builds the lines
-	for x in range(12):
+	for x in range(14):
 
 		#Checks to see if there are letters on the lines
 		row_found = False
@@ -74,7 +75,7 @@ def build_screen(positions):
 				for y in range(10):
 					display += " "
 
-				for y in range(16):
+				for y in range(18):
 
 					#Checks if there are letters at the position
 					letter_present = False
@@ -116,23 +117,41 @@ def get_blank_line(display):
 		display += " "
 	return display
 
+def position_star(positions,letters):
+
+	star = "*"
+	rand_letter = randint(0,26)
+	print(rand_letter)
+	letter = characters[rand_letter]
+	letters = "{}{}".format(letters,letter)
+	y=4
+	x=31-rand_letter
+
+	if rand_letter<21:
+		x=12
+		y=26-rand_letter
+	if rand_letter<13:
+		y=15
+		x=rand_letter-2
+	if rand_letter<8:
+		x=4
+		y=rand_letter+6
+
+	positions.append(set_position(x,y,star))
+
+	print("{} {} {} {}".format(x,y,rand_letter,letter))
+
+	return positions,letters
+
+
 
 """
 	number = randint(4,7)
 	letters = ""
 
 	for i in range(number):
-		star = "*"
-		rand_letter = randint(0,26)
-		letter = characters[rand_letter]
-		letters = "{}{}".format(letters,letter)
+	
 
-		x=6
-		y=rand_letter+6
-
-		if rand_letter<22:
-			y=10
-			x=28-rand_letter
 		elif rand_letter<14:
 			x=15
 			y=rand_letter-3
@@ -151,10 +170,14 @@ def get_blank_line(display):
 def main_game():
 	s=0
 	g=0
-	cs=64
-	title()
-	positions = build_positions_list()
-	build_screen(positions)
+	letters = ""
+
+	for x in range(6):
+		title()
+		positions = build_positions_list()
+		positions,letters = position_star(positions,letters)
+		build_screen(positions)
+		time.sleep(5)
 
 #Passes the current file as a module to the loader
 if __name__ == '__main__':
