@@ -22,7 +22,7 @@ instructions = "{}you make mistakes they will be angry - very angry ...\n".forma
 instructions = "{}Watch for starts on your screen - they show the letters in the Spirit's\n".format(instructions)
 instructions = "{}messages.".format(instructions)
 
-characters = ["a","b","c","d","e","f","g","h","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
+characters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
 
 def title():
 	spaces = util.tab(8,4)
@@ -42,12 +42,12 @@ def build_positions_list():
 	for i in range(8):
 
 		positions.append(set_position(5,6+i,characters[i]))
-		positions.append(set_position(11,6+i,characters[19-i]))
+		positions.append(set_position(11,6+i,characters[20-i]))
 
 	for i in range(5):
 
-		positions.append(set_position(6+i,5,characters[24-i]))
-		positions.append(set_position(5+i,16,characters[8+i]))
+		positions.append(set_position(6+i,5,characters[25-i]))
+		positions.append(set_position(6+i,14,characters[8+i]))
 
 	return positions
 
