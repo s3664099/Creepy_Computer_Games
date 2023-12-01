@@ -15,6 +15,8 @@ Date:
 Source: https://ia601902.us.archive.org/3/items/Creepy_Computer_Games_1983_Usborne_Publishing/Creepy_Computer_Games_1983_Usborne_Publishing.pdf
 This game can be found on page 16 of Creepy Computer Games, and it a python3 translation.
 
+Create an easy, medium, hard, difficult, impossible options (longer word, faster times)
+
 """
 
 instructions = "Messages from the Spirits are coming through, letter by letter. They want you to\n"
@@ -143,41 +145,55 @@ def position_star(positions,letters):
 
 	return positions,letters
 
+def guess_word(word,score):
 
+	correct = False
+	guesses = 0
 
-"""
-	number = randint(4,7)
-	letters = ""
+	while (not correct):
+		guess = input("What is your guess: ")
 
-	for i in range(number):
-	
-
-		elif rand_letter<14:
-			x=15
-			y=rand_letter-3
+		if guess == word:
+			score += len(word)
+			correct = True
 		else:
-			y=64
-			x=rand_letter+6
-		positions.append(set_position(x,y,star))
-"""
-	#Display Screen
-	#Pause
-	#Replace With Blank
-	#Get Quess
-	#If Guess = letters correct
-	#Else loose
+			guesses += 1
+
+			if guesses == 1:
+				print("The table begins to shake.")
+			elif guesses == 2:
+				print("The light build shatters")
+			elif guesses == 3:
+				print("A pair of clammy hands grasps your neck")
+				correct = True
+
+	return score,guesses
 
 def main_game():
-	s=0
-	g=0
-	letters = ""
 
-	for x in range(6):
+	letters = ""
+	word_size = randint(4,7)
+	speed = 5
+	score = 0
+	score_goal = 50
+
+	#Main Loop
+	while (score<score_goal)
+
+		#Turn Loop
+		for x in range(word_size):
+			title()
+			positions = build_positions_list()
+			positions,letters = position_star(positions,letters)
+			build_screen(positions)
+			time.sleep(speed)
+
 		title()
-		positions = build_positions_list()
-		positions,letters = position_star(positions,letters)
-		build_screen(positions)
-		time.sleep(5)
+		score, guesses = guess_word(letters,score)
+
+		#End Game - Guesses = 3, lose, otherwise win
+		#Difficulty Level - Increase speed, number of letters
+		#Add library of words and phrases.
 
 #Passes the current file as a module to the loader
 if __name__ == '__main__':
