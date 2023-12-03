@@ -165,12 +165,41 @@ def guess_word(word,score):
 
 	return score,guesses
 
+#Sets the difficulty for the game
+def get_difficulty():
+
+	difficulty = util.get_num_input("What Difficulty Would You Like (1 Easy, 5 Impossible)",1,5)
+	speed = 0
+	word_size = 0
+	score_goal = 0
+
+	if difficulty == 1:
+		speed = 5
+		word_size = randint(1,3)
+		score_goal = 10
+	elif difficulty == 2:
+		speed = 4
+		word_size = randint(2,5)
+		score_goal = 20
+	elif difficulty == 3:
+		speed = 3
+		word_size = randint(3,7)
+		score_goal = 30
+	elif difficulty == 4:
+		speed = 2
+		word_size = randint(5,10)
+		score_goal = 40
+	else:
+		speed = 1
+		word_size = randint(10,20)
+		score_goal = 50
+
+	return speed,word_size,score_goal
+
 def main_game():
 
-	word_size = randint(4,7)
-	speed = 1
+	speed,word_size,score_goal = get_difficulty()
 	score = 0
-	score_goal = 10
 	guesses = 0
 	game_end = False
 
