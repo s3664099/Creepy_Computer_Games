@@ -17,12 +17,6 @@ Date: 15 October 2023
 Update: 23 October 2023
 Source: https://ia601902.us.archive.org/3/items/Creepy_Computer_Games_1983_Usborne_Publishing/Creepy_Computer_Games_1983_Usborne_Publishing.pdf
 This game can be found on page 14 of Creepy Computer Games, and it a python3 translation.
-
-
-TODO:
-Add Notes to readme.md
-Add Seance to finish off Creepy Computer Games and remove folder
-Do Battleship.cpp, qwerkle, Connect 4, PIoT to clear clutter from folder
 """
 
 instructions = "It's a creepy sort of place. The identical dark corridors don't seem to go\n"

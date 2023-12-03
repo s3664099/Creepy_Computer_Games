@@ -175,23 +175,23 @@ def get_difficulty():
 
 	if difficulty == 1:
 		speed = 5
-		word_size = randint(1,3)
+		word_size = randint(0,4)
 		score_goal = 10
 	elif difficulty == 2:
 		speed = 4
-		word_size = randint(2,5)
+		word_size = randint(1,6)
 		score_goal = 20
 	elif difficulty == 3:
 		speed = 3
-		word_size = randint(3,7)
+		word_size = randint(2,8)
 		score_goal = 30
 	elif difficulty == 4:
 		speed = 2
-		word_size = randint(5,10)
+		word_size = randint(4,11)
 		score_goal = 40
 	else:
 		speed = 1
-		word_size = randint(10,20)
+		word_size = randint(9,21)
 		score_goal = 50
 
 	return speed,word_size,score_goal

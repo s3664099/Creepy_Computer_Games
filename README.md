@@ -85,6 +85,11 @@ yellow and the exit blocks red. Oh, I also added a random maze generator, though
 Oh, I should mention that you can either use a random maze, or the set maze, by setting random_builder to
 either true or false.
 
+**Sceance**
+This is the last game in the book. Basically you have a board where letters are placed around the sides. The game
+then randomly selects letters, and you have to repeat them at the end. However, you have to remember the letters,
+and you only get three shots.
+
 ## Updates
 **22 July 2023**
 Created the initial folder to hold the contents on the game.
