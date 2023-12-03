@@ -14,9 +14,6 @@ Version: 0
 Date: 
 Source: https://ia601902.us.archive.org/3/items/Creepy_Computer_Games_1983_Usborne_Publishing/Creepy_Computer_Games_1983_Usborne_Publishing.pdf
 This game can be found on page 16 of Creepy Computer Games, and it a python3 translation.
-
-Create an easy, medium, hard, difficult, impossible options (longer word, faster times)
-
 """
 
 instructions = "Messages from the Spirits are coming through, letter by letter. They want you to\n"
@@ -27,10 +24,11 @@ instructions = "{}messages.".format(instructions)
 
 characters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
 
-def title():
+def title(score,guesses):
 	spaces = util.tab(8,4)
 	util.clear_screen()
 	print("{}Sceance".format(spaces))
+	print("\nscore: {}   guesses: {}\n\n".format(score,guesses))
 
 #Constucts the dictionary to hold the position of a letter
 def set_position(x,y,letter):
@@ -106,7 +104,7 @@ def build_screen(positions):
 #Prints padding at the top
 def print_padding(display):
 
-	for x in range(5):
+	for x in range(3):
 		display = get_blank_line(display)
 		display += "\n"
 
@@ -122,10 +120,9 @@ def get_blank_line(display):
 def position_star(positions,letters):
 
 	star = "*"
-	rand_letter = randint(0,26)
-	print(rand_letter)
+	rand_letter = randint(0,25)
 	letter = characters[rand_letter]
-	letters = "{}{}".format(letters,letter)
+
 	y=4
 	x=31-rand_letter
 
@@ -140,8 +137,7 @@ def position_star(positions,letters):
 		y=rand_letter+6
 
 	positions.append(set_position(x,y,star))
-
-	print("{} {} {} {}".format(x,y,rand_letter,letter))
+	letters+=letter
 
 	return positions,letters
 
@@ -149,7 +145,7 @@ def guess_word(word,score):
 
 	correct = False
 	guesses = 0
-
+	print("Word {}: ".format(word))
 	while (not correct):
 		guess = input("What is your guess: ")
 
@@ -171,28 +167,41 @@ def guess_word(word,score):
 
 def main_game():
 
-	letters = ""
 	word_size = randint(4,7)
-	speed = 5
+	speed = 1
 	score = 0
-	score_goal = 50
+	score_goal = 10
+	guesses = 0
+	game_end = False
 
 	#Main Loop
-	while (score<score_goal)
+	while (game_end == False):
+
+		letters = ""
 
 		#Turn Loop
 		for x in range(word_size):
-			title()
+			title(score,guesses)
 			positions = build_positions_list()
 			positions,letters = position_star(positions,letters)
 			build_screen(positions)
 			time.sleep(speed)
 
-		title()
+		title(score,guesses)
 		score, guesses = guess_word(letters,score)
 
-		#End Game - Guesses = 3, lose, otherwise win
+		if (guesses == 3):
+			game_end = True
+		elif (score>=score_goal):
+			game_end = True
+
+	if (guesses == 3):
+		print("Too bad, you lose")
+	else:
+		print("Congratulations, you won")
+
 		#Difficulty Level - Increase speed, number of letters
+		#Create an easy, medium, hard, difficult, impossible options (longer word, faster times)
 		#Add library of words and phrases.
 
 #Passes the current file as a module to the loader
