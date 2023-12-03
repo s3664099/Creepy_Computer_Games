@@ -14,6 +14,12 @@ Version: 0
 Date: 
 Source: https://ia601902.us.archive.org/3/items/Creepy_Computer_Games_1983_Usborne_Publishing/Creepy_Computer_Games_1983_Usborne_Publishing.pdf
 This game can be found on page 16 of Creepy Computer Games, and it a python3 translation.
+
+TODO
+Don't have positions created every time
+Add a number to the positions
+Add words and phrases
+Do Battleship.cpp, qwerkle, Connect 4, PIoT to clear clutter from folder
 """
 
 instructions = "Messages from the Spirits are coming through, letter by letter. They want you to\n"
