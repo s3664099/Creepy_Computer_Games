@@ -175,33 +175,43 @@ def get_difficulty():
 	speed = 0
 	word_size = 0
 	score_goal = 0
+	min_number = 0
+	max_number = 0
 
 	if difficulty == 1:
 		speed = 5
-		word_size = randint(0,4)
+		max_number = 4
 		score_goal = 10
 	elif difficulty == 2:
 		speed = 4
-		word_size = randint(1,6)
+		min_number = 1
+		max_number = 6
 		score_goal = 20
 	elif difficulty == 3:
 		speed = 3
-		word_size = randint(2,8)
+		min_number = 2
+		max_number = 8
 		score_goal = 30
 	elif difficulty == 4:
 		speed = 2
-		word_size = randint(4,11)
+		min_number = 4
+		max_number = 11
 		score_goal = 40
 	else:
 		speed = 1
-		word_size = randint(9,21)
+		min_number = 9
+		max_number = 21
 		score_goal = 50
 
-	return speed,word_size,score_goal
+	return speed,min_number,max_number,score_goal
+
+def get_wordsize(min_number,max_number):
+
+	return randint(min_number,max_number)
 
 def main_game():
 
-	speed,word_size,score_goal = get_difficulty()
+	speed,min_number,max_number,score_goal = get_difficulty()
 	score = 0
 	guesses = 0
 	game_end = False
@@ -211,6 +221,7 @@ def main_game():
 	while (game_end == False):
 
 		letters = ""
+		word_size = get_wordsize(min_number,max_number)
 
 		#Turn Loop
 		for x in range(word_size):
