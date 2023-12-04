@@ -16,8 +16,6 @@ Source: https://ia601902.us.archive.org/3/items/Creepy_Computer_Games_1983_Usbor
 This game can be found on page 16 of Creepy Computer Games, and it a python3 translation.
 
 TODO
-Don't have positions created every time
-Add a number to the positions
 Add words and phrases
 Do Battleship.cpp, qwerkle, Connect 4, PIoT to clear clutter from folder
 """
@@ -147,11 +145,10 @@ def position_star(positions,letters):
 
 	return positions,letters
 
-def guess_word(word,score):
+def guess_word(word,score,guesses):
 
 	correct = False
-	guesses = 0
-	print("Word {}: ".format(word))
+
 	while (not correct):
 		guess = input("What is your guess: ")
 
@@ -208,6 +205,7 @@ def main_game():
 	score = 0
 	guesses = 0
 	game_end = False
+	positions = build_positions_list()
 
 	#Main Loop
 	while (game_end == False):
@@ -217,13 +215,13 @@ def main_game():
 		#Turn Loop
 		for x in range(word_size):
 			title(score,guesses)
-			positions = build_positions_list()
-			positions,letters = position_star(positions,letters)
-			build_screen(positions)
+			temp_positions = positions.copy()
+			temp_positions,letters = position_star(temp_positions,letters)
+			build_screen(temp_positions)
 			time.sleep(speed)
 
 		title(score,guesses)
-		score, guesses = guess_word(letters,score)
+		score, guesses = guess_word(letters,score,guesses)
 
 		if (guesses == 3):
 			game_end = True
