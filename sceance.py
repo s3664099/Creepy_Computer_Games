@@ -16,7 +16,14 @@ Source: https://ia601902.us.archive.org/3/items/Creepy_Computer_Games_1983_Usbor
 This game can be found on page 16 of Creepy Computer Games, and it a python3 translation.
 
 TODO
+add numbers to positions
 Add words and phrases
+
+- add switch so can by random letters or phrases
+- if phrases, gets the length of the word and sets the word length as such
+- gets the letter to finds the corresponding number
+- sends the number through to the position star
+
 Do Battleship.cpp, qwerkle, Connect 4, PIoT to clear clutter from folder
 """
 
