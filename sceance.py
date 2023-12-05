@@ -42,9 +42,9 @@ def title(score,guesses):
 	print("\nscore: {}   guesses: {}\n\n".format(score,guesses))
 
 #Constucts the dictionary to hold the position of a letter
-def set_position(x,y,letter):
+def set_position(x,y,letter,number):
 
-	return {"x": x, "y": y,"Letter": letter}
+	return {"x": x, "y": y,"Letter": letter,"number":number}
 
 #Constructs the list for the letters' positions
 def build_positions_list():
@@ -53,13 +53,13 @@ def build_positions_list():
 
 	for i in range(8):
 
-		positions.append(set_position(5,6+i,characters[i]))
-		positions.append(set_position(11,6+i,characters[20-i]))
+		positions.append(set_position(5,6+i,characters[i],i))
+		positions.append(set_position(11,6+i,characters[20-i],20-i))
 
 	for i in range(5):
 
-		positions.append(set_position(6+i,5,characters[25-i]))
-		positions.append(set_position(6+i,14,characters[8+i]))
+		positions.append(set_position(6+i,5,characters[25-i],25-i))
+		positions.append(set_position(6+i,14,characters[8+i],8+i))
 
 	return positions
 
@@ -147,7 +147,7 @@ def position_star(positions,letters):
 		x=4
 		y=rand_letter+6
 
-	positions.append(set_position(x,y,star))
+	positions.append(set_position(x,y,star,-1))
 	letters+=letter
 
 	return positions,letters
