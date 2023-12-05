@@ -20,7 +20,10 @@ add numbers to positions
 Add words and phrases
 
 - add switch so can by random letters or phrases
-- if phrases, gets the length of the word and sets the word length as such
+- if phrases, 
+- builds the list based on the difficulty setting
+- select random word/phrase from list
+- gets the length of the word and sets the word length as such
 - gets the letter to finds the corresponding number
 - sends the number through to the position star
 
@@ -35,11 +38,9 @@ instructions = "{}messages.".format(instructions)
 
 characters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
 
-phrases_01 = ["bob","the","mum","an","if","of"]
-phrases_02 = ["bread","milk","butter","ghost","ghoul"]
-phrases_03 = ["gotobed","elephant","thaifood","gogodoll","voodooman"]
-phrases_04 = ["iamdeadnow","ihaveabonyarm","youaremyfriend","gotothecityhall","payyourtaxes"]
-phrases_05 = ["itistimetojumphigh","myimpressionisimperfect","starflightcanbedangerous","dontplaywithdemonsontheroad","itisawonderfultimeoftheyear"]
+phrases = [["bob","the","mum","an","if","of"],["bread","milk","butter","ghost","ghoul"],["gotobed","elephant","thaifood","gogodoll","voodooman"],
+			["iamdeadnow","ihaveabonyarm","youaremyfriend","gotothecityhall","payyourtaxes"],
+			["itistimetojumphigh","myimpressionisimperfect","starflightcanbedangerous","dontplaywithdemonsontheroad","itisawonderfultimeoftheyear"]]
 
 def title(score,guesses):
 	spaces = util.tab(8,4)
@@ -134,11 +135,16 @@ def get_blank_line(display):
 		display += " "
 	return display
 
-def position_star(positions,letters):
+def position_star(positions,letters,use_words):
 
 	star = "*"
 	rand_letter = randint(0,25)
-	letter = characters[rand_letter]
+	letter = ""
+
+	if (use_words == False)
+		letter = characters[rand_letter]
+	else:
+		#Determine the number connected to the letter and place it in rand_letter
 
 	y=4
 	x=31-rand_letter
@@ -216,7 +222,7 @@ def get_difficulty():
 		max_number = 21
 		score_goal = 50
 
-	return speed,min_number,max_number,score_goal
+	return speed,min_number,max_number,score_goal,difficulty
 
 def get_wordsize(min_number,max_number):
 
@@ -224,11 +230,17 @@ def get_wordsize(min_number,max_number):
 
 def main_game():
 
-	speed,min_number,max_number,score_goal = get_difficulty()
+	speed,min_number,max_number,score_goal,difficulty = get_difficulty()
 	score = 0
 	guesses = 0
 	game_end = False
+	use_words = False
+	word_list = []
 	positions = build_positions_list()
+
+	if use_words == True:
+		#Build the wordlist here
+		#Cycles through the wordlists and attaches each of the word to the new list
 
 	#Main Loop
 	while (game_end == False):
@@ -236,11 +248,20 @@ def main_game():
 		letters = ""
 		word_size = get_wordsize(min_number,max_number)
 
+		#The word is randomly selected, and the wordsize is determined
+		if use_words == True:
+			print()
+
 		#Turn Loop
 		for x in range(word_size):
 			title(score,guesses)
 			temp_positions = positions.copy()
-			temp_positions,letters = position_star(temp_positions,letters)
+
+			if use_words == False:
+				temp_positions,letters = position_star(temp_positions,letters,use_words)
+			else:
+				#goes through each of the letters of the word, and sends it through
+
 			build_screen(temp_positions)
 			time.sleep(speed)
 
