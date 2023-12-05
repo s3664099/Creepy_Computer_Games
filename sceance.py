@@ -35,6 +35,12 @@ instructions = "{}messages.".format(instructions)
 
 characters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
 
+phrases_01 = ["bob","the","mum","an","if","of"]
+phrases_02 = ["bread","milk","butter","ghost","ghoul"]
+phrases_03 = ["gotobed","elephant","thaifood","gogodoll","voodooman"]
+phrases_04 = ["iamdeadnow","ihaveabonyarm","youaremyfriend","gotothecityhall","payyourtaxes"]
+phrases_05 = ["itistimetojumphigh","myimpressionisimperfect","starflightcanbedangerous","dontplaywithdemonsontheroad","itisawonderfultimeoftheyear"]
+
 def title(score,guesses):
 	spaces = util.tab(8,4)
 	util.clear_screen()
