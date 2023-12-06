@@ -144,7 +144,14 @@ def position_star(positions,letters,use_words):
 	if (use_words == False):
 		letter = characters[rand_letter]
 	else:
-		#Determine the number connected to the letter and place it in rand_letter
+
+		#Find the matching letter, and get the number
+		char_no = 0
+		for x in characters:
+
+			if letters == x:
+				rand_letter = char_no
+			char_no += 1
 
 	y=4
 	x=31-rand_letter
@@ -242,19 +249,14 @@ def main_game():
 
 		if difficulty > 0:
 			word_list.extend(phrases[0])
-			print(word_list)
 		if difficulty > 1:
 			word_list.extend(phrases[1])
-			print(word_list)
 		if difficulty > 2:
 			word_list.extend(phrases[2])		
-			print(word_list)
 		if difficulty > 3:
 			word_list.extend(phrases[3])
-			print(word_list)
 		if difficulty > 4:
 			word_list.extend(phrases[4])
-			print(word_list)			
 
 	#Main Loop
 	while (game_end == False):
@@ -264,17 +266,19 @@ def main_game():
 
 		#The word is randomly selected, and the wordsize is determined
 		if use_words == True:
-			print()
+			letters = word_list[randint(0,len(word_list)-1)]
+			word_size = len(letters)
 
 		#Turn Loop
 		for x in range(word_size):
+
 			title(score,guesses)
 			temp_positions = positions.copy()
 
 			if use_words == False:
 				temp_positions,letters = position_star(temp_positions,letters,use_words)
 			else:
-				#goes through each of the letters of the word, and sends it through
+				temp_positions,blank = position_star(temp_positions,letters[x],use_words)
 
 			build_screen(temp_positions)
 			time.sleep(speed)
@@ -291,10 +295,6 @@ def main_game():
 		print("Too bad, you lose")
 	else:
 		print("Congratulations, you won")
-
-		#Difficulty Level - Increase speed, number of letters
-		#Create an easy, medium, hard, difficult, impossible options (longer word, faster times)
-		#Add library of words and phrases.
 
 #Passes the current file as a module to the loader
 if __name__ == '__main__':
