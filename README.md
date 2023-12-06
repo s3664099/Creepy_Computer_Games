@@ -90,6 +90,15 @@ This is the last game in the book. Basically you have a board where letters are 
 then randomly selects letters, and you have to repeat them at the end. However, you have to remember the letters,
 and you only get three shots.
 
+I have added difficulty levels, which means the words are longer, and the time that you get to see the board is less.
+You also need to get a higher score to win, though the three tries (which resets each round) remain the same.
+I have also added words and phrases (though with no spaces). There are only about six words per difficulty level (though)
+the words for the lesser difficulty levels are available for the greater difficulty levels. You can add words by adding
+(or removing) words from the phrases list.
+
+A final idea is that you could have a random phrase being spelt out word for word, but this will require a complete rewrite
+so I will leave it at that.
+
 ## Updates
 **22 July 2023**
 Created the initial folder to hold the contents on the game.

@@ -14,20 +14,6 @@ Version: 0
 Date: 
 Source: https://ia601902.us.archive.org/3/items/Creepy_Computer_Games_1983_Usborne_Publishing/Creepy_Computer_Games_1983_Usborne_Publishing.pdf
 This game can be found on page 16 of Creepy Computer Games, and it a python3 translation.
-
-TODO
-add numbers to positions
-Add words and phrases
-
-- add switch so can by random letters or phrases
-- if phrases, 
-- builds the list based on the difficulty setting
-- select random word/phrase from list
-- gets the length of the word and sets the word length as such
-- gets the letter to finds the corresponding number
-- sends the number through to the position star
-
-Do Battleship.cpp, qwerkle, Connect 4, PIoT to clear clutter from folder
 """
 
 instructions = "Messages from the Spirits are coming through, letter by letter. They want you to\n"
@@ -38,6 +24,7 @@ instructions = "{}messages.".format(instructions)
 
 characters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
 
+#Modify this to add more words
 phrases = [["bob","the","mum","an","if","of"],["bread","milk","butter","ghost","ghoul"],["gotobed","elephant","thaifood","gogodoll","voodooman"],
 			["iamdeadnow","ihaveabonyarm","youaremyfriend","gotothecityhall","payyourtaxes"],
 			["itistimetojumphigh","myimpressionisimperfect","starflightcanbedangerous","dontplaywithdemonsontheroad","itisawonderfultimeoftheyear"]]
