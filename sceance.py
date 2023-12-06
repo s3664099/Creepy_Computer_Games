@@ -141,7 +141,7 @@ def position_star(positions,letters,use_words):
 	rand_letter = randint(0,25)
 	letter = ""
 
-	if (use_words == False)
+	if (use_words == False):
 		letter = characters[rand_letter]
 	else:
 		#Determine the number connected to the letter and place it in rand_letter
@@ -234,13 +234,27 @@ def main_game():
 	score = 0
 	guesses = 0
 	game_end = False
-	use_words = False
+	use_words = True
 	word_list = []
 	positions = build_positions_list()
 
 	if use_words == True:
-		#Build the wordlist here
-		#Cycles through the wordlists and attaches each of the word to the new list
+
+		if difficulty > 0:
+			word_list.extend(phrases[0])
+			print(word_list)
+		if difficulty > 1:
+			word_list.extend(phrases[1])
+			print(word_list)
+		if difficulty > 2:
+			word_list.extend(phrases[2])		
+			print(word_list)
+		if difficulty > 3:
+			word_list.extend(phrases[3])
+			print(word_list)
+		if difficulty > 4:
+			word_list.extend(phrases[4])
+			print(word_list)			
 
 	#Main Loop
 	while (game_end == False):
